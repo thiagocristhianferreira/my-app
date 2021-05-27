@@ -1,26 +1,17 @@
-import firebase from 'firebase/app';
+import firebase from 'firebase';
 import 'firebase/database';
 import 'firebase/auth';
 
-export const authConfig = firebase.initializeApp({
-  apiKey: process.env.REACT_APP_FIREBASE_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_SENDER_ID,
-});
+const config = {
+  apiKey: "AIzaSyD1Ri3g1q8TGPAmVE3dBjK_Lmek5qwQ4LQ",
+  authDomain: "my-app-98f0b.firebaseapp.com",
+  databaseURL: "https://my-app-98f0b-default-rtdb.firebaseio.com",
+  projectId: "my-app-98f0b",
+  storageBucket: "my-app-98f0b.appspot.com",
+  messagingSenderId: "1019379842225",
+  appId: "1:1019379842225:web:58e61c650d3f3362787690"
+};
 
-// export const firebaseDb = authConfig();
-// export const firebaseDb = authConfig.database().ref();
+export const authConfig = firebase.initializeApp(config);
 
-  // const createUser = (email, password) => {
-  //   const data = {
-  //     email,
-  //     password,
-  //   }
-  //   return authConfig.database().ref().child('users').push(data);
-  // }
-  
+export const firebaseDb = authConfig.database().ref();

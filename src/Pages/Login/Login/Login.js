@@ -1,26 +1,26 @@
-// import { useHistory } from 'react-router-dom';
-// import { useContext, useRef } from 'react';
-// import firebase from 'firebase/app';
+import { useHistory } from 'react-router-dom';
+import { useContext, useRef } from 'react';
+import firebase from 'firebase/app';
 import './style.css'
-// import ContextMarvel from '../../Context/ContextMarvel';
+import ContextMarvel from '../../Context/ContextMarvel';
 
 function Login() {
-  // const history = useHistory();
-  // const emailRef = useRef(null);
-  // const passRef = useRef(null);
+  const history = useHistory();
+  const emailRef = useRef(null);
+  const passRef = useRef(null);
 
-  // const { setOnOff } = useContext(ContextMarvel);
+  const { setOnOff } = useContext(ContextMarvel);
 
-  // const loginAuth = (email, password) => {
-  //   firebase.auth().signInWithEmailAndPassword(email, password)
-  //   .then(() => {
-  //     // setOnOff('on');
-  //   })
-  //   .catch((error) => {
-  //     console.log(error.code, error.message);
-  //     return alert(error.message);
-  //   });
-  // }
+  const loginAuth = (email, password) => {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(() => {
+      setOnOff('on');
+    })
+    .catch((error) => {
+      console.log(error.code, error.message);
+      return alert(error.message);
+    });
+  }
 
   return (
     <section>
@@ -35,7 +35,7 @@ function Login() {
               required
               type="text"
               placeholder="exemplo@email.com"
-              // ref={emailRef}
+              ref={emailRef}
             />
           </p>
            
@@ -47,7 +47,7 @@ function Login() {
               required
               type="password"
               placeholder="ex. 123456789"
-              // ref={passRef}
+              ref={passRef}
             /> 
           </p>
            
@@ -62,9 +62,9 @@ function Login() {
             value="Logar"
             onClick={(e) => {
               e.preventDefault();
-              // history.push('/marvelcharacters');
-              // loginAuth(emailRef.current.value, passRef.current.value);
-              // alert('Bem-vindo ' + emailRef.current.value);
+              history.push('/marvelcharacters');
+              loginAuth(emailRef.current.value, passRef.current.value);
+              alert('Bem-vindo ' + emailRef.current.value);
             } }
           >
             Logar

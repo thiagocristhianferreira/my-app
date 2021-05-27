@@ -1,0 +1,7 @@
+.fixedHeader {
+  background-color: black;
+  color: antiquewhite;
+  position: fixed;
+  text-align: center;
+  width: 100vmax;
+}
