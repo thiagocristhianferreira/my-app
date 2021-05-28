@@ -71,12 +71,12 @@ const MarvelCharacters = () => {
             />
           </Form.Group>
         </Form.Row>
-        { comics.map((comic, index) => {
-          const { title, description } = comic;
+        { comics.map((comic) => {
+          const { title, description, id } = comic;
           const { extension, path } = comic.thumbnail;
           const creators = comic.creators.items;
           return (
-            <Card key={ index } className="m-4" style={{ width: '18rem' }}>
+            <Card key={ id } className="m-4" style={{ width: '18rem' }}>
               <Card.Img variant="top" src={`${path}.${extension}`} />
               <Card.Body>
                 <Card.Title>{title}</Card.Title>
@@ -126,12 +126,12 @@ const MarvelCharacters = () => {
       { 
         comics
         .filter(comic => (comic.title).toLowerCase().startsWith(searchTerm))
-        .map((comic, index) => {
-        const { title, description } = comic;
+        .map((comic) => {
+        const { title, description, id } = comic;
         const { extension, path } = comic.thumbnail;
         const creators = comic.creators.items;
         return (
-          <Card key={ index } className="m-4" style={{ width: '18rem' }}>
+          <Card key={ id } className="m-4" style={{ width: '18rem' }}>
             <Card.Img variant="top" src={`${path}.${extension}`} />
             <Card.Body>
               <Card.Title>{title}</Card.Title>

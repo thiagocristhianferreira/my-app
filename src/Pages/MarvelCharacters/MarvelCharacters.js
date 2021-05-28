@@ -44,6 +44,7 @@ const MarvelCharacters = () => {
       />
     )
   }
+  console.log(characters);
 
   if (!searchTerm) {
     return (
@@ -74,11 +75,11 @@ const MarvelCharacters = () => {
         </Form.Row>
         { 
           characters
-            .map((character, index) => {
-              const { name, description } = character;
+            .map((character) => {
+              const { name, description, id } = character;
               const { extension, path } = character.thumbnail;
               return (
-                <Card key={ index } className="m-4" style={{ width: '18rem' }}>
+                <Card key={ id } className="m-4" style={{ width: '18rem' }}>
                   <Card.Img variant="top" src={`${path}.${extension}`} />
                   <Card.Body>
                     <Card.Title>{name}</Card.Title>
@@ -121,11 +122,11 @@ const MarvelCharacters = () => {
       { 
         characters
           .filter(character => (character.name).toLowerCase().startsWith(searchTerm))
-          .map((character, index) => {
-            const { name, description } = character;
+          .map((character) => {
+            const { name, description, id } = character;
             const { extension, path } = character.thumbnail;
             return (
-              <Card key={ index } className="m-4" style={{ width: '18rem' }}>
+              <Card key={ id } className="m-4" style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={`${path}.${extension}`} />
                 <Card.Body>
                   <Card.Title>{name}</Card.Title>
