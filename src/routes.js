@@ -7,11 +7,13 @@ import MarvelComics from './Pages/MarvelComics/MarvelComics';
 import MarvelCharacters from './Pages/MarvelCharacters/MarvelCharacters';
 import ProviderMarvel from './Context/ProviderMarvel';
 import Perfil from './Pages/Perfil/Perfil';
+import Favorites from './Pages/Favorites/Favorites';
 
 
 function Routes() {
   return (
     <ProviderMarvel>
+      <PrivateRoute path="/favorites" component={ Favorites } />
       <PrivateRoute path="/perfil" component={ Perfil } />
       <PrivateRoute path="/marvelcharacters" component={ MarvelCharacters } />
       <PrivateRoute path="/marvelcomics" component={ MarvelComics } />

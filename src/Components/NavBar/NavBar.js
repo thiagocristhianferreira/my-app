@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import firebase from 'firebase/app';
 import { authConfig } from '../../auth/config';
 import { IconContext } from 'react-icons';
 import * as IoIcons from 'react-icons/io';
@@ -66,6 +65,12 @@ function Navbar() {
               <Link to={'/marvelcomics'}>
                 <IoIcons.IoMdPeople />
                 <span>{'Marvel Comics'}</span>
+              </Link>
+            </li>
+            <li className={'nav-text'}>
+              <Link to={'/favorites'}>
+                <FaAddressCard />
+                <span>{'Favoritos'}</span>
               </Link>
             </li>
             <li className={'nav-text'}>

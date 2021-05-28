@@ -48,7 +48,7 @@ const MarvelCharacters = () => {
     return (
       <section className="w-100 bg-dark d-flex flex-wrap">
         <Navbar />
-        <Form.Row className="w-75 mx-auto d-flex">
+        <Form.Row className="w-100 mx-auto d-flex">
           <Form.Group className="w-25 p-1">
             <Form.Control
               type="number"
@@ -100,7 +100,7 @@ const MarvelCharacters = () => {
   return (
     <section className="w-100 bg-dark d-flex flex-wrap">
       <Navbar />
-      <Form.Row className="w-75 mx-auto d-flex">
+      <Form.Row className="w-100 mx-auto d-flex">
         <Form.Group className="w-25 p-1">
           <Form.Control
             type="number"

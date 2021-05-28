@@ -5,6 +5,7 @@ import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
 import { getCharacters } from '../../Services/marvelAPI';
 import Navbar from '../../Components/NavBar/NavBar';
+import favoriteImg from '../../Images/favorite-off.png';
 
 const MarvelCharacters = () => {
   const { 
@@ -14,8 +15,6 @@ const MarvelCharacters = () => {
     limitResultsApi, setLimitResultsApi,
   } = useContext(ContextMarvel);
 
-  console.log(limitResultsApi);
-
   const [searchTerm, setSearchTerm] = useState('');
   
   useEffect(() => {
@@ -24,6 +23,7 @@ const MarvelCharacters = () => {
     const fetchCharacters = async () => {
       const result = await getCharacters(limitResultsApi);
       setCharacters(result);
+      console.log(result)
     }
     fetchCharacters();
   }, [limitResultsApi, setCharacters, setLoading, setTitlePage]);
@@ -44,13 +44,12 @@ const MarvelCharacters = () => {
       />
     )
   }
-  console.log(characters);
 
   if (!searchTerm) {
     return (
       <section className="w-100 bg-dark d-flex flex-wrap">
         <Navbar />
-        <Form.Row className="w-75 mx-auto d-flex">
+        <Form.Row className="w-100 mx-auto d-flex">
           <Form.Group className="w-25 p-1">
             <Form.Control
               type="number"
@@ -83,6 +82,13 @@ const MarvelCharacters = () => {
                   <Card.Img variant="top" src={`${path}.${extension}`} />
                   <Card.Body>
                     <Card.Title>{name}</Card.Title>
+                    <Card.Subtitle>
+                      <img
+                        src={ favoriteImg }
+                        alt="Favorite"
+                        style={ { width: "30px" } }
+                      />
+                    </Card.Subtitle>
                     <Card.Text>{ description }</Card.Text>
                   </Card.Body>
                 </Card>
@@ -96,7 +102,7 @@ const MarvelCharacters = () => {
   return (
     <section className="w-100 bg-dark d-flex flex-wrap">
       <Navbar />
-      <Form.Row className="w-75 mx-auto d-flex">
+      <Form.Row className="w-100 mx-auto d-flex">
         <Form.Group className="w-25 p-1">
           <Form.Control
             type="number"
@@ -130,6 +136,7 @@ const MarvelCharacters = () => {
                 <Card.Img variant="top" src={`${path}.${extension}`} />
                 <Card.Body>
                   <Card.Title>{name}</Card.Title>
+                  <Card.Subtitle><img src={ favoriteImg } alt="Favorite" /></Card.Subtitle>
                   <Card.Text>{ description }</Card.Text>
                 </Card.Body>
               </Card>
