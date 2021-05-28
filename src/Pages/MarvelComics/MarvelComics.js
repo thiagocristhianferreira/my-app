@@ -5,6 +5,7 @@ import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
 import { getComics } from '../../Services/marvelAPI';
 import Navbar from '../../Components/NavBar/NavBar';
+import './style.css';
 
 const MarvelCharacters = () => {
   const { 
@@ -37,10 +38,12 @@ const MarvelCharacters = () => {
 
   if (loading) {
     return (
-      <img
-        src={ loadingGif }
-        alt="Gif de Loading"
-      />
+      <div className="img-loading">
+        <img
+          src={ loadingGif }
+          alt="Gif de Loading"
+        />
+      </div>
     )
   }
 

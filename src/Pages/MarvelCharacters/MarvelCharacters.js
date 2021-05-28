@@ -7,6 +7,7 @@ import { getCharacters } from '../../Services/marvelAPI';
 import Navbar from '../../Components/NavBar/NavBar';
 // import favoriteOff from '../../Images/favorite-off.png';
 // import favoriteOn from '../../Images/favorite-on.png';
+import './style.css';
 
 const MarvelCharacters = () => {
   const { 
@@ -61,10 +62,12 @@ const MarvelCharacters = () => {
 
   if (loading) {
     return (
-      <img
-        src={ loadingGif }
-        alt="Gif de Loading"
-      />
+      <div className="img-loading">
+        <img
+          src={ loadingGif }
+          alt="Gif de Loading"
+        />
+      </div>
     )
   }
 

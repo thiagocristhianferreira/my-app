@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
   if (loading) {
     return (
-    <React.Fragment>
+    <React.Fragment className="img-logo">
       <img
         className="img-logo"
         src={ imgLogo }
