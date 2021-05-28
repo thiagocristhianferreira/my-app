@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { Card  } from 'react-bootstrap';
+import React, { useContext, useEffect, useState } from 'react';
+import { Card, Form  } from 'react-bootstrap';
 
 import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
@@ -11,17 +11,30 @@ const MarvelCharacters = () => {
     loading, setLoading,
     characters, setCharacters,
     setTitlePage,
-   } = useContext(ContextMarvel);
+    limitResultsApi, setLimitResultsApi,
+  } = useContext(ContextMarvel);
 
+  console.log(limitResultsApi);
+
+  const [searchTerm, setSearchTerm] = useState('');
+  
   useEffect(() => {
+    setLoading(false);
+    setTitlePage('Marvel Characters');
     const fetchCharacters = async () => {
-      const result = await getCharacters();
+      const result = await getCharacters(limitResultsApi);
       setCharacters(result);
-      setLoading(false);
-      setTitlePage('Marvel Characters');
     }
     fetchCharacters();
-  }, [setCharacters, setLoading, setTitlePage]);
+  }, [limitResultsApi, setCharacters, setLoading, setTitlePage]);
+
+  const fetchLimitCharacters = async () => {
+    if (!searchTerm) {
+      return false;
+    }
+    const result = await getCharacters(limitResultsApi);
+    setCharacters(result);
+  }
 
   if (loading) {
     return (
@@ -31,24 +44,97 @@ const MarvelCharacters = () => {
       />
     )
   }
+
+  if (!searchTerm) {
+    return (
+      <section className="w-100 bg-dark d-flex flex-wrap">
+        <Navbar />
+        <Form.Row className="w-75 mx-auto d-flex">
+          <Form.Group className="w-25 p-1">
+            <Form.Control
+              type="number"
+              className="w-100"
+              placeholder="1-100"
+              max="100"
+              min="1"
+              onChange={ (e) => {
+                e.target.value ? setLimitResultsApi(e.target.value) : setLimitResultsApi(25);
+                fetchLimitCharacters(Number(e.target.value));
+              } }
+            />
+          </Form.Group>
+          <Form.Group className="w-100 p-1">
+            <Form.Control
+              type="text"
+              className="w-100"
+              placeholder="Search Characters"
+              onChange={ (e) => setSearchTerm(e.target.value) }
+            />
+          </Form.Group>
+        </Form.Row>
+        { 
+          characters
+            .map((character, index) => {
+              const { name, description } = character;
+              const { extension, path } = character.thumbnail;
+              return (
+                <Card key={ index } className="m-4" style={{ width: '18rem' }}>
+                  <Card.Img variant="top" src={`${path}.${extension}`} />
+                  <Card.Body>
+                    <Card.Title>{name}</Card.Title>
+                    <Card.Text>{ description }</Card.Text>
+                  </Card.Body>
+                </Card>
+              )
+            })
+        }
+      </section>
+    );
+  }
+
   return (
     <section className="w-100 bg-dark d-flex flex-wrap">
       <Navbar />
-      { characters.map(comic => {
-        const { name, description } = comic;
-        const { extension, path } = comic.thumbnail;
-        return (
-          <Card className="m-4" style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={`${path}.${extension}`} />
-            <Card.Body>
-              <Card.Title>{name}</Card.Title>
-              <Card.Text>
-                { description }
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        )
-      }) }
+      <Form.Row className="w-75 mx-auto d-flex">
+        <Form.Group className="w-25 p-1">
+          <Form.Control
+            type="number"
+            className="w-100"
+            placeholder="1-100"
+            max="100"
+            min="1"
+            onChange={ (e) => {
+              setLimitResultsApi(e.target.value);
+              fetchLimitCharacters(Number(e.target.value));
+            } }
+          />
+        </Form.Group>
+        <Form.Group className="w-100 p-1">
+          <Form.Control
+            type="text"
+            className="w-100"
+            placeholder="Search Characters"
+            onChange={ (e) => setSearchTerm(e.target.value) }
+          />
+        </Form.Group>
+      </Form.Row>
+      { 
+        characters
+          .filter(character => (character.name).toLowerCase().startsWith(searchTerm))
+          .map((character, index) => {
+            const { name, description } = character;
+            const { extension, path } = character.thumbnail;
+            return (
+              <Card key={ index } className="m-4" style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={`${path}.${extension}`} />
+                <Card.Body>
+                  <Card.Title>{name}</Card.Title>
+                  <Card.Text>{ description }</Card.Text>
+                </Card.Body>
+              </Card>
+            )
+          })
+      }
     </section>
   );
 };

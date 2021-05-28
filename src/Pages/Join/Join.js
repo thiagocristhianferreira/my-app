@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useHistory } from 'react-router';
-import firebase from 'firebase/app';
+import { authConfig } from '../../auth/config';
 import './style.css';
 
 function Join() {
@@ -9,7 +9,7 @@ function Join() {
   const passRef = useRef(null);
 
   const createUser = (email, password) => {
-    return firebase.auth()
+    return authConfig.auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
         alert('Bem-vindo ' + email);

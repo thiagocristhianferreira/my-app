@@ -7,18 +7,20 @@ const hash = md5(timestamp + privateKey + publicKey);
 const baseURLcharacters = "https://gateway.marvel.com:443/v1/public/characters?ts=";
 const baseURLcomics = "https://gateway.marvel.com:443/v1/public/comics?ts=";
 
-export const getCharacters = () => {
+
+
+export const getCharacters = (limits) => {
   const result = fetch(
-    `${baseURLcharacters}${timestamp}&apikey=${publicKey}&hash=${hash}`,
+    `${baseURLcharacters}${timestamp}&apikey=${publicKey}&hash=${hash}&limit=${limits}`,
   )
     .then((response) => response.json())
     .then((result) => (result.data.results));
   return result;
 };
 
-export const getComics = () => {
+export const getComics = (limits) => {
   const result = fetch(
-    `${baseURLcomics}${timestamp}&apikey=${publicKey}&hash=${hash}`,
+    `${baseURLcomics}${timestamp}&apikey=${publicKey}&hash=${hash}&limit=${limits}`,
   )
     .then((response) => response.json())
     .then((result) => (result.data.results));

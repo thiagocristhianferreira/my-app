@@ -7,6 +7,7 @@ function ProviderMarvel({ children }) {
   const [comics, setComics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [onOff, setOnOff] = useState('');
+  const [limitResultsApi, setLimitResultsApi] = useState(25);
 
   return (
     <ContextMarvel.Provider
@@ -17,6 +18,7 @@ function ProviderMarvel({ children }) {
           characters, setCharacters,
           comics, setComics,
           onOff, setOnOff,
+          limitResultsApi, setLimitResultsApi,
         }
       }
     >

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
+import { authConfig } from '../../auth/config';
 import { IconContext } from 'react-icons';
 import * as IoIcons from 'react-icons/io';
 import { RiLogoutBoxFill } from 'react-icons/ri';
@@ -9,7 +10,6 @@ import { BiMessageAltDetail } from 'react-icons/bi';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-// import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import ContextMarvel from '../../Context/ContextMarvel';
 
@@ -25,7 +25,7 @@ function Navbar() {
   const { setOnOff } = useContext(ContextMarvel);
 
   const logoutOff = () => {
-    firebase.auth().signOut()
+    authConfig.auth().signOut()
     .then(() => {
       setOnOff('');
     })

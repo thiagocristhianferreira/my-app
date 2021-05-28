@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import React, { useContext, useEffect, useState } from 'react';
+import { Card, Form, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
@@ -11,17 +11,29 @@ const MarvelCharacters = () => {
     comics, setComics,
     loading, setLoading,
     setTitlePage,
-   } = useContext(ContextMarvel);
+    limitResultsApi, setLimitResultsApi,
+  } = useContext(ContextMarvel);
+
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchComics = async () => {
-      const result = await getComics();
+      const result = await getComics(limitResultsApi);
+      console.log(result)
       setComics(result);
       setLoading(false);
     }
     setTitlePage('Marvel Comics');
     fetchComics();
-  }, [setComics, setLoading, setTitlePage]);
+  }, [limitResultsApi, setComics, setLoading, setTitlePage]);
+
+  const fetchLimitCharacters = async () => {
+    if (!searchTerm) {
+      return false;
+    }
+    const result = await getComics(limitResultsApi);
+    setComics(result);
+  }
 
   if (loading) {
     return (
@@ -31,15 +43,95 @@ const MarvelCharacters = () => {
       />
     )
   }
+
+  if (!searchTerm) {
+    return (
+      <section className="w-100 bg-dark d-flex flex-wrap">
+        <Navbar />
+        <Form.Row className="w-75 mx-auto d-flex">
+          <Form.Group className="w-25 p-1">
+            <Form.Control
+              type="number"
+              className="w-100"
+              placeholder="1-100"
+              max="100"
+              min="1"
+              onChange={ (e) => {
+                e.target.value ? setLimitResultsApi(e.target.value) : setLimitResultsApi(25);
+                fetchLimitCharacters(Number(e.target.value));
+              } }
+            />
+          </Form.Group>
+          <Form.Group className="w-100 p-1">
+            <Form.Control
+              type="text"
+              className="w-100"
+              placeholder="Search Comics"
+              onChange={ (e) => setSearchTerm(e.target.value) }
+            />
+          </Form.Group>
+        </Form.Row>
+        { comics.map((comic, index) => {
+          const { title, description } = comic;
+          const { extension, path } = comic.thumbnail;
+          const creators = comic.creators.items;
+          return (
+            <Card key={ index } className="m-4" style={{ width: '18rem' }}>
+              <Card.Img variant="top" src={`${path}.${extension}`} />
+              <Card.Body>
+                <Card.Title>{title}</Card.Title>
+                <Card.Text>
+                  { description }
+                </Card.Text>
+              </Card.Body>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>CRIADORES</ListGroupItem>
+                { creators.map((creator, index) => (
+                  <ListGroupItem key={ index }>{ creator.name }</ListGroupItem>
+                )) }
+              </ListGroup>
+            </Card>
+          )
+        }) }
+      </section>
+    );
+  }
+
   return (
     <section className="w-100 bg-dark d-flex flex-wrap">
       <Navbar />
-      { comics.map(comic => {
+      <Form.Row className="w-75 mx-auto d-flex">
+        <Form.Group className="w-25 p-1">
+          <Form.Control
+            type="number"
+            className="w-100"
+            placeholder="1-100"
+            max="100"
+            min="1"
+            onChange={ (e) => {
+              e.target.value ? setLimitResultsApi(e.target.value) : setLimitResultsApi(25);
+              fetchLimitCharacters(Number(e.target.value));
+            } }
+          />
+        </Form.Group>
+        <Form.Group className="w-100 p-1">
+          <Form.Control
+            type="text"
+            className="w-100"
+            placeholder="Search Characters"
+            onChange={ (e) => setSearchTerm(e.target.value) }
+          />
+        </Form.Group>
+      </Form.Row>
+      { 
+        comics
+        .filter(comic => (comic.title).toLowerCase().startsWith(searchTerm))
+        .map((comic, index) => {
         const { title, description } = comic;
         const { extension, path } = comic.thumbnail;
         const creators = comic.creators.items;
         return (
-          <Card className="m-4" style={{ width: '18rem' }}>
+          <Card key={ index } className="m-4" style={{ width: '18rem' }}>
             <Card.Img variant="top" src={`${path}.${extension}`} />
             <Card.Body>
               <Card.Title>{title}</Card.Title>
@@ -49,15 +141,16 @@ const MarvelCharacters = () => {
             </Card.Body>
             <ListGroup className="list-group-flush">
               <ListGroupItem>CRIADORES</ListGroupItem>
-              { creators.map(creator => (
-                <ListGroupItem>{ creator.name }</ListGroupItem>
+              { creators.map((creator, index) => (
+                <ListGroupItem key={ index }>{ creator.name }</ListGroupItem>
               )) }
             </ListGroup>
           </Card>
-        )
-      }) }
+        )})
+      }
     </section>
   );
+  
 };
 
 export default MarvelCharacters;
