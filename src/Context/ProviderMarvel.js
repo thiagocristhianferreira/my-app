@@ -9,6 +9,7 @@ function ProviderMarvel({ children }) {
   const [onOff, setOnOff] = useState('');
   const [limitResultsApi, setLimitResultsApi] = useState(25);
   const [favoritesCharacters, setFavoritesCharacters] = useState([]);
+  const [favoriteImg, setFavoriteImg] = useState(false);
 
   return (
     <ContextMarvel.Provider
@@ -21,6 +22,7 @@ function ProviderMarvel({ children }) {
           onOff, setOnOff,
           limitResultsApi, setLimitResultsApi,
           favoritesCharacters, setFavoritesCharacters,
+          favoriteImg, setFavoriteImg,
         }
       }
     >

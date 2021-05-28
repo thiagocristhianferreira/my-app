@@ -5,7 +5,8 @@ import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
 import { getCharacters } from '../../Services/marvelAPI';
 import Navbar from '../../Components/NavBar/NavBar';
-import favoriteImg from '../../Images/favorite-off.png';
+// import favoriteOff from '../../Images/favorite-off.png';
+// import favoriteOn from '../../Images/favorite-on.png';
 
 const MarvelCharacters = () => {
   const { 
@@ -13,7 +14,29 @@ const MarvelCharacters = () => {
     characters, setCharacters,
     setTitlePage,
     limitResultsApi, setLimitResultsApi,
+    favoriteImg, setFavoriteImg,
+    favoritesCharacters, setFavoritesCharacters,
   } = useContext(ContextMarvel);
+
+  // const favoritesCharactersFiltered.filter(item => item.id !== id)
+  // Favoriting(id, name, description, extension, path);
+  // if (favoritesCharacters.characters.find(item => item.id === id)) {
+  //   e.target.currentSrc = favoriteOn;
+  // }
+  const Favoriting = (e, id, name, description, extension, path) => {
+    if (favoritesCharacters) {
+      console.log(characters.find(item => item.id === id))
+      console.log('entrou')
+      if (characters.find(item => item.id === id)) {
+        return e.target.currentSrc = favoriteOn;
+      }
+      return 
+      
+    }
+    return console.log('não entrou');
+  }
+
+  console.log(favoritesCharacters);
 
   const [searchTerm, setSearchTerm] = useState('');
   
@@ -44,6 +67,9 @@ const MarvelCharacters = () => {
       />
     )
   }
+
+  const favoriteOn = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxBsF0GUiFFlLSvzUPgUfnCVnc7uDdtfuZzVp9gMkj4Cyn-nGu6wLl70m_U-wSsNaWKbo&usqp=CAU';
+  const favoriteOff = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLpo5DwAcV_dfdjlHL3y6DRslNifKLgqR0dKFQt2Qdax61ssv6IeUPcZtpSAOp9VAgr-Q&usqp=CAU';
 
   if (!searchTerm) {
     return (
@@ -82,12 +108,24 @@ const MarvelCharacters = () => {
                   <Card.Img variant="top" src={`${path}.${extension}`} />
                   <Card.Body>
                     <Card.Title>{name}</Card.Title>
-                    <Card.Subtitle>
-                      <img
-                        src={ favoriteImg }
-                        alt="Favorite"
-                        style={ { width: "30px" } }
-                      />
+                    <Card.Subtitle className="d-flex justify-content-end">
+                      <button key={id}
+                        onClick={ (e) => {
+                          console.log(id);
+                          console.log(e.target.currentSrc);
+                          // const favoritesCharactersFiltered.filter(item => item.id !== id)
+                          // Favoriting(id, name, description, extension, path);
+                          if (favoritesCharacters.characters.find(item => item.id === id)) {
+                            e.target.currentSrc = favoriteOn;
+                          }
+                        } }
+                      >
+                        <img
+                          src={ favoriteImg }
+                          alt="Favorite"
+                          style={ { width: "30px" } }
+                        />
+                      </button>
                     </Card.Subtitle>
                     <Card.Text>{ description }</Card.Text>
                   </Card.Body>
@@ -136,7 +174,18 @@ const MarvelCharacters = () => {
                 <Card.Img variant="top" src={`${path}.${extension}`} />
                 <Card.Body>
                   <Card.Title>{name}</Card.Title>
-                  <Card.Subtitle><img src={ favoriteImg } alt="Favorite" /></Card.Subtitle>
+                  <button
+                    onClick={ (id, name, description, extension, path) => {
+                      console.log(id);
+                      Favoriting(id, name, description, extension, path);
+                    } }
+                  >
+                    <img
+                      // src={ favoriteImg ? favoriteOn : favoriteOff }
+                      alt="Favorite"
+                      style={ { width: "30px" } }
+                    />
+                  </button>
                   <Card.Text>{ description }</Card.Text>
                 </Card.Body>
               </Card>
