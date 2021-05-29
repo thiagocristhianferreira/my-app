@@ -3,6 +3,7 @@ import { useContext, useRef } from 'react';
 import './style.css'
 import ContextMarvel from '../../Context/ContextMarvel';
 import { authConfig } from '../../auth/config';
+import { useState } from 'react';
 
 function Login() {
   const history = useHistory();
@@ -11,6 +12,21 @@ function Login() {
   
   const { setOnOff } = useContext(ContextMarvel);
 
+  const [isNotValid, setIsNotValid] = useState(true);
+
+  const validation = () => {
+    const reGex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    const PASSWORD_LENGTH = 5;
+    console.log(emailRef.current.value)
+    console.log(passRef.current.value)
+    // onChange={condition ? value : undefined}
+    if (emailRef.current === null) return true;
+    if ((passRef.current.value.length > PASSWORD_LENGTH) && (reGex.test(emailRef.current.value))) {
+      // console.log(passRef.current.value)
+      return setIsNotValid(false);
+    }
+    return setIsNotValid(true);
+  };
 
   const loginAuth = (email, password) => {
     authConfig.auth().signInWithEmailAndPassword(email, password)
@@ -37,6 +53,7 @@ function Login() {
               type="text"
               placeholder="exemplo@email.com"
               ref={emailRef}
+              onChange={ () => validation() }
             />
           </p>
            
@@ -48,6 +65,7 @@ function Login() {
               required
               type="password"
               placeholder="ex. 123456789"
+              onChange={ () => validation() }
               ref={passRef}
             /> 
           </p>
@@ -59,8 +77,10 @@ function Login() {
           
           <button
             className="join-buttom"
+            id={ isNotValid ? 'gray' : 'blue' }
             type="submit"
             value="Logar"
+            disabled={ isNotValid }
             onClick={(e) => {
               e.preventDefault();
               loginAuth(emailRef.current.value, passRef.current.value);

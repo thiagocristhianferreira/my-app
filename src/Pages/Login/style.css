@@ -5,3 +5,11 @@
   margin: auto;
   height: 100%;
 }
+
+#gray {
+  background-color: gray;
+}
+
+#blue {
+  background: #3d9db3;
+}
