@@ -2,7 +2,6 @@
 
 <img
   src="https://www.nicepng.com/png/detail/32-323279_stone-logo-stone-adquirente-png.png"
-  style={{ width: "50%" }}
 />
 Desafio Técnico realizado para a empresa : Stone
 
