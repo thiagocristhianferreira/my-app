@@ -1,6 +1,8 @@
 # Marvel Comics
 
-<img src="https://www.pngix.com/pngfile/middle/29-294893_stone-logo-stone-pagamentos-hd-png-download.png" />
+<img
+  src="https://www.nicepng.com/png/detail/32-323279_stone-logo-stone-adquirente-png.png"
+/>
 Desafio Técnico realizado para a empresa : Stone
 
 ## Descrição:
