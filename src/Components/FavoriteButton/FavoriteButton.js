@@ -7,7 +7,6 @@ const FavoriteButton = (props) => {
   const [favoriteOnOff, setFavoriteOnOff] = useState(false);
 
   const Favoriting = () => {
-    console.log(props.favorite)
   const {
     id, name, description, thumbnail: { extension, path }
   } = props.favorite;
@@ -19,7 +18,6 @@ const FavoriteButton = (props) => {
   const fav = JSON.parse(localStorage.getItem('favoritesCharacters'));
 
   if (fav) {
-    console.log(fav.find(item => item.id === id));
     if (fav.find(item => item.id === id)) {
       const favoritesCharactersFiltered = fav
         .filter((item) => item.id !== id);

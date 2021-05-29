@@ -19,11 +19,11 @@ const MarvelCharacters = () => {
   const [searchTerm, setSearchTerm] = useState('');
   
   useEffect(() => {
-    setLoading(false);
     setTitlePage('Marvel Characters');
     const fetchCharacters = async () => {
       const result = await getCharacters(limitResultsApi);
       setCharacters(result);
+      setLoading(false);
     }
     fetchCharacters();
   }, [limitResultsApi, setCharacters, setLoading, setTitlePage]);
@@ -39,6 +39,13 @@ const MarvelCharacters = () => {
   if (loading) {
     return (
       <img
+        style={{
+          display: "block",
+          marginTop: "15%",
+          marginLeft: "auto",
+          marginRight: "auto",
+          width: "20%"
+        }}
         src={ loadingGif }
         alt="Gif de Loading"
       />

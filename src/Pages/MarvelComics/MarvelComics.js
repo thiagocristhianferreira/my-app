@@ -20,7 +20,6 @@ const MarvelCharacters = () => {
   useEffect(() => {
     const fetchComics = async () => {
       const result = await getComics(limitResultsApi);
-      console.log(result)
       setComics(result);
       setLoading(false);
     }
@@ -39,6 +38,13 @@ const MarvelCharacters = () => {
   if (loading) {
     return (
       <img
+        style={{
+          display: "block",
+          marginTop: "15%",
+          marginLeft: "auto",
+          marginRight: "auto",
+          width: "20%"
+        }}
         src={ loadingGif }
         alt="Gif de Loading"
       />

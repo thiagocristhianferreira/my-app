@@ -17,12 +17,8 @@ function Login() {
   const validation = () => {
     const reGex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     const PASSWORD_LENGTH = 5;
-    console.log(emailRef.current.value)
-    console.log(passRef.current.value)
-    // onChange={condition ? value : undefined}
     if (emailRef.current === null) return true;
     if ((passRef.current.value.length > PASSWORD_LENGTH) && (reGex.test(emailRef.current.value))) {
-      // console.log(passRef.current.value)
       return setIsNotValid(false);
     }
     return setIsNotValid(true);
