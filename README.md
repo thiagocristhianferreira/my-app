@@ -1,6 +1,6 @@
 # Marvel Comics
 
-<img src="%PUBLIC_URL%/Images/logo-stone.png" />
+<img src="%PUBLIC_URL%/src/Images/logo-stone.png" />
 Desafio Técnico realizado para a empresa : Stone
 
 ## Descrição:
