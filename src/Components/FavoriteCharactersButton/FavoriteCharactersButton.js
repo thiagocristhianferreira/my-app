@@ -27,7 +27,7 @@ const FavoriteCharactersButton = (props) => {
           'favoritesCharacters',
           JSON.stringify(favoritesFiltered),
         );
-        authConfig.firestore().collection('favorites')
+        authConfig.firestore().collection('favoritesCharacters')
           .doc(user.uid).set({ favoritesCharacters: (favoritesFiltered) });
         return setFavoriteOnOff(false);
       } else {
@@ -36,7 +36,7 @@ const FavoriteCharactersButton = (props) => {
           JSON.stringify([...fav, data]),
         );
         console.log([...fav, data])
-        authConfig.firestore().collection('favorites')
+        authConfig.firestore().collection('favoritesCharacters')
           .doc(user.uid).set({ favoritesCharacters: ([...fav, data]) });
         console.log([...fav, data])
         return setFavoriteOnOff(true);
@@ -46,7 +46,7 @@ const FavoriteCharactersButton = (props) => {
         'favoritesCharacters',
         JSON.stringify([data]),
       );
-      authConfig.firestore().collection('favorites')
+      authConfig.firestore().collection('favoritesCharacters')
           .doc(user.uid).set({ favoritesCharacters: ([data]) });
       return setFavoriteOnOff(true);
     }

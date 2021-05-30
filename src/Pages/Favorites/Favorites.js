@@ -1,32 +1,46 @@
 import React, { useContext, useEffect } from 'react';
-import { Card } from 'react-bootstrap';
-import Navbar from '../../Components/NavBar/NavBar';
 
+import Navbar from '../../Components/NavBar/NavBar';
 import ContextMarvel from '../../Context/ContextMarvel';
+import loadingGif from '../../Images/loading-buffering.gif';
+import FavoriteCharacterComponent from '../../Components/FavoriteCharactersComponent/FavoriteCharacterComponent';
+import FavoriteComicComponent from '../../Components/FavoriteComicComponent/FavoriteComicComponent';
 
 const Favorites = () => {
   const { 
-    favoritesCharacters, setFavoritesCharacters,
     loading, setLoading,
+    // favoritePage, setFavoritePage,
     setTitlePage,
   } = useContext(ContextMarvel);
 
   useEffect(() => {
     setTitlePage('Favoritos');
+    setLoading(false);
   }, []);
 
+  if (loading) {
+    return (
+      <img
+        style={{
+          display: "block",
+          marginTop: "15%",
+          marginLeft: "auto",
+          marginRight: "auto",
+          width: "20%"
+        }}
+        src={ loadingGif }
+        alt="Gif de Loading"
+      />
+    )
+  }
   return (
-    <section>
-    <Navbar />
-    <Card key={ 'id' } className="m-4" style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={`${'path'}.${'extension'}`} />
-      <Card.Body>
-        <Card.Title>{'name'}</Card.Title>
-        <Card.Text>{ 'description' }</Card.Text>
-      </Card.Body>
-    </Card>
+    <section className="w-100 bg-dark d-flex flex-wrap">
+      <Navbar />
+      <FavoriteCharacterComponent />
+      <FavoriteComicComponent />
     </section>
-  )
+  );
+  
 }
 
 export default Favorites;

@@ -1,14 +1,24 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import favoriteOff from '../../Images/favorite-off.png';
 import favoriteOn from '../../Images/favorite-on.png';
 import { authConfig } from '../../auth/config';
 import { AuthContext } from '../../auth/Authcontext';
+import ContextMarvel from '../../Context/ContextMarvel';
 
 const FavoriteComicsButton = (props) => {
   const { user } = useContext(AuthContext);
 
+  const { 
+    favoritePage,
+  } = useContext(ContextMarvel);
+
   const [favoriteOnOff, setFavoriteOnOff] = useState(false);
+
+  useEffect(() => {
+    if (favoritePage) return setFavoriteOnOff(true);
+  }, []);
+
 
   const {
     id, title, description, thumbnail: { extension, path }
@@ -19,7 +29,7 @@ const FavoriteComicsButton = (props) => {
   const data = {
     id, title, desc, thumbnail: { extension, path }
   }
-  
+
   const favoriting = () => {
     const fav = JSON.parse(localStorage.getItem('favoritesComics'));
     if (fav) {
@@ -30,7 +40,7 @@ const FavoriteComicsButton = (props) => {
           'favoritesComics',
           JSON.stringify(favoritesFiltered),
         );
-        authConfig.firestore().collection('favorites')
+        authConfig.firestore().collection('favoritesComics')
           .doc(user.uid).set({ favoritesComics: (favoritesFiltered) });
         return setFavoriteOnOff(false);
       } else {
@@ -39,7 +49,7 @@ const FavoriteComicsButton = (props) => {
           JSON.stringify([...fav, data]),
         );
         console.log([...fav, data])
-        authConfig.firestore().collection('favorites')
+        authConfig.firestore().collection('favoritesComics')
           .doc(user.uid).set({ favoritesComics: ([...fav, data]) });
         console.log([...fav, data])
         return setFavoriteOnOff(true);
@@ -49,7 +59,7 @@ const FavoriteComicsButton = (props) => {
         'favoritesComics',
         JSON.stringify([data]),
       );
-      authConfig.firestore().collection('favorites')
+      authConfig.firestore().collection('favoritesComics')
           .doc(user.uid).set({ favoritesComics: ([data]) });
       return setFavoriteOnOff(true);
     }

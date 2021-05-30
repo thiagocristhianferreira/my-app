@@ -3,7 +3,8 @@
 <img
   src="https://www.nicepng.com/png/detail/32-323279_stone-logo-stone-adquirente-png.png"
 />
-Desafio Técnico realizado para a empresa : Stone
+
+<h2>Desafio Técnico realizado para a empresa : Stone</h2>
 
 ## Descrição:
 

@@ -8,10 +8,7 @@ function ProviderMarvel({ children }) {
   const [loading, setLoading] = useState(true);
   const [onOff, setOnOff] = useState('');
   const [limitResultsApi, setLimitResultsApi] = useState(25);
-  const [favoritesCharacters, setFavoritesCharacters] = useState([]);
-  const [favoriteImg, setFavoriteImg] = useState(false);
-  const [dataFavorites, setDataFavorites] = useState([]);
-  const [favoritesDB, setFavoritesDB] = useState([]);
+  const [favoritePage, setFavoritePage] = useState(true);
 
   return (
     <ContextMarvel.Provider
@@ -23,10 +20,7 @@ function ProviderMarvel({ children }) {
           comics, setComics,
           onOff, setOnOff,
           limitResultsApi, setLimitResultsApi,
-          favoritesCharacters, setFavoritesCharacters,
-          favoriteImg, setFavoriteImg,
-          dataFavorites, setDataFavorites,
-          favoritesDB, setFavoritesDB,
+          favoritePage, setFavoritePage
         }
       }
     >
