@@ -9,7 +9,6 @@ import FavoriteComicComponent from '../../Components/FavoriteComicComponent/Favo
 const Favorites = () => {
   const { 
     loading, setLoading,
-    // favoritePage, setFavoritePage,
     setTitlePage,
   } = useContext(ContextMarvel);
 
@@ -34,10 +33,10 @@ const Favorites = () => {
     )
   }
   return (
-    <section className="w-100 bg-dark d-flex flex-wrap">
+    <section className="w-100 bg-dark d-block">
       <Navbar />
-      <FavoriteCharacterComponent />
-      <FavoriteComicComponent />
+      <FavoriteCharacterComponent className="d-block flex-wrap" />
+      <FavoriteComicComponent className="d-block flex-wrap" />
     </section>
   );
   

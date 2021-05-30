@@ -66,11 +66,10 @@ const FavoriteCharacterComponent = () => {
                     <Card.Subtitle className="d-flex justify-content-end">
                     <button
                       onClick={ () => {
-                        console.log(id);
                         const favoritesFiltered = favoritesCharacters
                           .filter((item) => item.id !== id);
                         return authConfig.firestore().collection('favoritesCharacters')
-                          .doc(user.uid).set({ favoritesCharacters: (favoritesFiltered) });
+                          .doc(user.uid).set({ favoritesCharacters: favoritesFiltered, });
                       } }
                     >
                       <img
