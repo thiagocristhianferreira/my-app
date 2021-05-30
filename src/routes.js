@@ -12,11 +12,11 @@ import Favorites from './Pages/Favorites/Favorites';
 function Routes() {
   return (
     <ProviderMarvel>
+      <Route path="/join" component={ Join } />
       <PrivateRoute path="/favorites" component={ Favorites } />
       <PrivateRoute path="/perfil" component={ Perfil } />
       <PrivateRoute path="/marvelcharacters" component={ MarvelCharacters } />
       <PrivateRoute path="/marvelcomics" component={ MarvelComics } />
-      <Route path="/join" component={ Join } />
       <Route exact path="/" component={ Login } />
     </ProviderMarvel>
   );

@@ -11,6 +11,7 @@ function ProviderMarvel({ children }) {
   const [favoritesCharacters, setFavoritesCharacters] = useState([]);
   const [favoriteImg, setFavoriteImg] = useState(false);
   const [dataFavorites, setDataFavorites] = useState([]);
+  const [favoritesDB, setFavoritesDB] = useState([]);
 
   return (
     <ContextMarvel.Provider
@@ -25,6 +26,7 @@ function ProviderMarvel({ children }) {
           favoritesCharacters, setFavoritesCharacters,
           favoriteImg, setFavoriteImg,
           dataFavorites, setDataFavorites,
+          favoritesDB, setFavoritesDB,
         }
       }
     >

@@ -6,7 +6,7 @@ import loadingGif from '../../Images/loading-buffering.gif';
 import { getCharacters } from '../../Services/marvelAPI';
 import Navbar from '../../Components/NavBar/NavBar';
 import './style.css';
-import FavoriteButton from '../../Components/FavoriteButton/FavoriteButton';
+import FavoriteCharactersButton from '../../Components/FavoriteCharactersButton/FavoriteCharactersButton';
 
 const MarvelCharacters = () => {
   const { 
@@ -87,14 +87,13 @@ const MarvelCharacters = () => {
               const dataFavorites = {
                 name, description, id, thumbnail: { extension, path }
               }
-              
               return (
                 <Card key={ id } className="m-4" style={{ width: '18rem' }}>
                   <Card.Img variant="top" src={`${path}.${extension}`} />
                   <Card.Body>
                     <Card.Title>{name}</Card.Title>
                     <Card.Subtitle className="d-flex justify-content-end">
-                      <FavoriteButton favorite={ dataFavorites } />
+                      <FavoriteCharactersButton favorite={ dataFavorites } />
                     </Card.Subtitle>
                     <Card.Text>{ description }</Card.Text>
                   </Card.Body>
@@ -146,7 +145,7 @@ const MarvelCharacters = () => {
                 <Card.Img variant="top" src={`${path}.${extension}`} />
                 <Card.Body>
                   <Card.Title>{name}</Card.Title>
-                  <FavoriteButton favorite={ dataFavorites } />
+                  <FavoriteCharactersButton favorite={ dataFavorites } />
                   <Card.Text>{ description }</Card.Text>
                 </Card.Body>
               </Card>

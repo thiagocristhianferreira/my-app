@@ -5,7 +5,7 @@ import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
 import { getComics } from '../../Services/marvelAPI';
 import Navbar from '../../Components/NavBar/NavBar';
-import FavoriteButton from '../../Components/FavoriteButton/FavoriteButton';
+import FavoriteComicsButton from '../../Components/FavoriteComicsButton/FavoriteComicsButton';
 
 const MarvelCharacters = () => {
   const { 
@@ -18,12 +18,12 @@ const MarvelCharacters = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
+    setTitlePage('Marvel Comics');
     const fetchComics = async () => {
       const result = await getComics(limitResultsApi);
       setComics(result);
       setLoading(false);
     }
-    setTitlePage('Marvel Comics');
     fetchComics();
   }, [limitResultsApi, setComics, setLoading, setTitlePage]);
 
@@ -90,7 +90,9 @@ const MarvelCharacters = () => {
               <Card.Img variant="top" src={`${path}.${extension}`} />
               <Card.Body>
                 <Card.Title>{title}</Card.Title>
-                <FavoriteButton favorite={ dataFavorites } />
+                <FavoriteComicsButton
+                  favorite={ dataFavorites }
+                />
                 <Card.Text>
                   { description }
                 </Card.Text>
@@ -141,11 +143,17 @@ const MarvelCharacters = () => {
         const { title, description, id } = comic;
         const { extension, path } = comic.thumbnail;
         const creators = comic.creators.items;
+        const dataFavorites = {
+          title, description, id, thumbnail: { extension, path }
+        }
         return (
           <Card key={ id } className="m-4" style={{ width: '18rem' }}>
             <Card.Img variant="top" src={`${path}.${extension}`} />
             <Card.Body>
               <Card.Title>{title}</Card.Title>
+              <FavoriteComicsButton
+                  favorite={ dataFavorites }
+                />
               <Card.Text>
                 { description }
               </Card.Text>
