@@ -41,23 +41,6 @@ const FavoriteCharacterComponent = () => {
     )
   }
 
-  const removeFav = () => {
-    if (favoritesComics) {
-      const { id } = favoritesComics;
-      console.log(id, favoritesComics)
-      if (favoritesComics.find(item => item.id === id)) {
-        const favoritesFiltered = favoritesComics
-          .filter((item) => item.id !== id);
-        // localStorage.setItem(
-        //   'favoritesComics',
-        //   JSON.stringify(favoritesFiltered),
-        // );
-        return authConfig.firestore().collection('favoritesComics')
-          .doc(user.uid).set({ favoritesComics: (favoritesFiltered) });
-      }
-    }
-  }
-
   return (
     <div>
       <h1>Favavorites Comics</h1>
@@ -68,9 +51,6 @@ const FavoriteCharacterComponent = () => {
             .map((character) => {
               const { title, description, id } = character;
               const { extension, path } = character.thumbnail;
-              // const dataFavorites = {
-              //   title, description, id, thumbnail: { extension, path }
-              // }
               return (
                 <Card key={ id } className="m-4" style={{ width: '18rem' }}>
                   <Card.Img variant="top" src={`${path}.${extension}`} />
