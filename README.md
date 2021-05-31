@@ -48,43 +48,43 @@ senha: 123456789
 
 ### Testes da Aplicação:
 
+<h2>Striker - Coverage</h2>
 <img
   src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-05-31%2000-54-35.png?alt=media&token=5f456a0a-d6ab-4038-9325-037df4d0a1e5"
 />
-<h2>Striker - Coverage</h2>
 
+<h2>Tela de Login</h2>
 <img
   src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-05-31%2000-57-05.png?alt=media&token=a2d74d53-276e-4f32-b037-84345ade2366"
 />
-<h2>Tela de Login</h2>
 
+<h2>Tela NotFound</h2>
 <img
   src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-05-31%2000-57-34.png?alt=media&token=dc2ed268-75bd-4af0-9b86-8c3b48f981eb"
 />
-<h2>Tela NotFound</h2>
 
 
 ### Alguns usuários:
 
+<h2>Usuários</h2>
 <img
   src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-05-31%2001-20-59.png?alt=media&token=c726f982-a734-4412-ac9c-749a2fbabb74"
 />
-<h2>Usuários</h2>
 
 
 ### Banco de Dados não-relacional:
 
+<h2>Favorites Characters</h2>
 <img
   src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-05-31%2001-00-23.png?alt=media&token=038d0629-af6a-4e99-82bb-b59ce7b78c70"
 />
-<h2>Favorites Characters</h2>
 
+<h2>Favorites Comics</h2>
 <img
   src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-05-31%2001-00-40.png?alt=media&token=68257329-cd92-4a46-ae91-adc465e6bd2d"
 />
-<h2>Favorites Comics</h2>
 
+<h2>Users</h2>
 <img
   src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-05-31%2001-01-04.png?alt=media&token=cc361a9a-a383-4bfa-b39b-1d4f6688f25e"
 />
-<h2>Users</h2>
