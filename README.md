@@ -46,7 +46,7 @@ senha: 123456789
 - Firebase
 
 
-### Testes da Aplicação:
+# Testes da Aplicação:
 
 <h2>Striker - Coverage</h2>
 <img
@@ -64,7 +64,7 @@ senha: 123456789
 />
 
 
-### Alguns usuários:
+# Alguns usuários:
 
 <h2>Usuários</h2>
 <img
@@ -72,7 +72,7 @@ senha: 123456789
 />
 
 
-### Banco de Dados não-relacional:
+# Banco de Dados não-relacional:
 
 <h2>Favorites Characters</h2>
 <img
