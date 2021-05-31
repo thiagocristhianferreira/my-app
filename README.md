@@ -43,7 +43,11 @@ senha: 123456789
 - React Hooks
 - Context API
 - Node
-- Firebase
+- Firebase:
+  * Authentication
+  * Cloud Firestore
+  * Storage
+  * Hosting
 
 
 # Testes da Aplicação:
