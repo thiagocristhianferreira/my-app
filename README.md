@@ -7,6 +7,8 @@
 <h2>Desafio Técnico realizado para a empresa : Stone</h2>
 
 ## Descrição:
+[Marvel APP](https://my-app-98f0b.web.app/ "Marvel APP")
+[Marvel WEB](https://my-app-98f0b.firebaseapp.com/ "Marvel WEB")
 
 Essa é uma aplicação onde é possível encontrar todas as informações sobre as comics e characters da marvel.
 
