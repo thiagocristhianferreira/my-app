@@ -50,6 +50,7 @@ function Login() {
               placeholder="exemplo@email.com"
               ref={emailRef}
               onChange={ () => validation() }
+              data-testid="email-input"
             />
           </p>
            
@@ -63,6 +64,7 @@ function Login() {
               placeholder="ex. 123456789"
               onChange={ () => validation() }
               ref={passRef}
+              data-testid="password-input"
             /> 
           </p>
            

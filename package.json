@@ -6,6 +6,9 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@stryker-mutator/core": "^3.3.1",
+    "@stryker-mutator/javascript-mutator": "^3.3.1",
+    "@stryker-mutator/jest-runner": "^3.3.1",
     "bootstrap": "^5.0.1",
     "dotenv": "^8.2.0",
     "eslint": "^7.27.0",
@@ -20,6 +23,7 @@
     "react-scripts": "^4.0.3",
     "react-social-login-buttons": "^3.4.0",
     "reactstrap": "^8.9.0",
+    "stryker": "^0.35.1",
     "stylelint": "^13.13.1",
     "stylelint-order": "^4.1.0",
     "web-vitals": "^1.0.1"
@@ -30,7 +34,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test-coverage": "react-scripts test --coverage --watchAll=false"
   },
   "eslintConfig": {
     "extends": [

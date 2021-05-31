@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { screen, waitFor } from '@testing-library/react';
 import RenderWithRouter from './renderWithRouter';
 import App from '../App';
+import userEvent from '@testing-library/user-event';
 
 describe('Testando o componente <Login.js />', () => {
   it('Testando se a página contém um heading h1 com o texto "Login"', async () => {
@@ -58,6 +59,32 @@ describe('Testando o componente <Login.js />', () => {
       expect(button).toBeInTheDocument();
       expect(button).toHaveAttribute('href', '/join');
       expect(screen.getByRole('link')).toHaveAttribute('href', '/join');
+    });
+  });
+
+  it('Testando a validação de e-mail e senha', async () => {
+    RenderWithRouter(<App />);
+
+    await waitFor(() => {
+      const button = screen.getByText(/logar/i);
+      const emailInput = screen.getByTestId(/email-input/);
+      const passwordInput = screen.getByTestId(/password-input/);
+
+      userEvent.type(emailInput, 'teste1@teste@com');
+      userEvent.type(passwordInput, '123');
+      expect(button).toBeDisabled();
+
+      userEvent.type(emailInput, 'teste1@teste');
+      userEvent.type(passwordInput, '1234');
+      expect(button).toBeDisabled();
+
+      userEvent.type(emailInput, 'teste.com');
+      userEvent.type(passwordInput, '12345');
+      expect(button).toBeDisabled();
+
+      userEvent.type(emailInput, '@teste1@teste.com');
+      userEvent.type(passwordInput, '123456');
+      expect(button).toBeDisabled();
     });
   });
 });
