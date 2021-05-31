@@ -6,6 +6,7 @@
 }
 
 body{
+  background-size: cover;
   margin:10px;
   width: 100%;
   background-image: url('../../Images/45f768b820b843c5ea0fbf99aaefa2bc.jpg');
