@@ -7,13 +7,13 @@
 <h2>Desafio Técnico realizado para a empresa : Stone</h2>
 
 ## Descrição:
-Links para a aplicação: [Marvel APP](https://my-app-98f0b.web.app/ "Marvel APP")
+Link para a aplicação EM DESENVOLVIMENTO: [Marvel APP](https://marvelapp-development-thiagoc.herokuapp.com/ "Marvel APP")
 
-[Marvel WEB](https://my-app-98f0b.firebaseapp.com/ "Marvel WEB")
+Link para a aplicação EM PRODUÇÃO: [Marvel APP](https://marvelapp-thiagocristhian.herokuapp.com/ "Marvel APP")
 
 Essa é uma aplicação onde é possível encontrar todas as informações sobre as comics e characters da marvel.
 
-É possível a criação de usuários (no localhost por enquanto), de Characters e de Comics Favoritos.
+É possível a criação de usuários (bug de cadastro corrigido), de Characters e de Comics Favoritos.
 
 Possui uma barra de pesquisa onde é possível fazer a busca pelo Character ou Comic dentro da quantidade de cards definida. A pesquisa é realizada com base no nome do Character ou Comic.
 
@@ -24,14 +24,6 @@ O Header traz o nome da página atual.
 Para acesssar as páginas existe uma barra de navegação lateral.
 
 Ainda há muito espaço para melhorias.
-
-Para navegar na aplicação:
-
-email: teste1@teste.com.br
-senha: 123456789
-
-email: teste2@teste.com
-senha: 123456789
 
 ### API Utilizada: 
 
@@ -48,9 +40,11 @@ senha: 123456789
 - Node
 - Firebase:
   * Authentication
-  * Cloud Firestore
   * Storage
-  * Hosting
+
+- Heroku:
+  * Hosting - Frontend
+  * Hosting - Backend
 
 
 # Testes da Aplicação:
