@@ -16,8 +16,8 @@ const FavoriteComicsButton = (props) => {
   const [favoriteOnOff, setFavoriteOnOff] = useState(false);
 
   useEffect(() => {
-    if (favoritePage) return setFavoriteOnOff(true);
-  }, []);
+    if (favoritePage) return setFavoriteOnOff(false);
+  }, [favoritePage]);
 
 
   const {

@@ -15,7 +15,7 @@ const Favorites = () => {
   useEffect(() => {
     setTitlePage('Favoritos');
     setLoading(false);
-  }, []);
+  }, [setLoading, setTitlePage]);
 
   if (loading) {
     return (

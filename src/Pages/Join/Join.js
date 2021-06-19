@@ -27,7 +27,7 @@ function Join() {
         <form method="POST" action=""> 
           <h1>Cadastro</h1> 
            
-          <p> 
+          {/* <p> 
             <label htmlFor="nome_cad">Seu nome</label>
             <input
               id="nome_cad"
@@ -36,7 +36,7 @@ function Join() {
               required
               placeholder="ex. Fulano de Tal"
             />
-          </p>
+          </p> */}
            
           <p> 
             <label htmlFor="email_cad">Seu e-mail</label>

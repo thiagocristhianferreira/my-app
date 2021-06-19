@@ -18,7 +18,7 @@ function Routes() {
         <PrivateRoute path="/perfil" component={ Perfil } />
         <PrivateRoute path="/marvelcharacters" component={ MarvelCharacters } />
         <PrivateRoute path="/marvelcomics" component={ MarvelComics } />
-        <Route exact path="/join" component={ Join } />
+        <Route path="/join" component={ Join } />
         <Route exact path="/" component={ Login } />
         <Route component={ NotFound } />
       </Switch>
