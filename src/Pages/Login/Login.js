@@ -15,20 +15,28 @@ function Login() {
   const [isNotValid, setIsNotValid] = useState(true);
   const [token, setToken] = useState('');
 
-  const handleSubmit = () => {
-    const user = {
+  const handleSubmit = async () => {
+    const user = JSON.stringify({
       email: emailRef.current.value,
       pass: passRef.current.value
-    };
+    });
 
-    axios.post('https://marvelapp-dev-back.herokuapp.com/', user)
-      .then(response => {
-        setUser(true);
-        setOnOff('on');
-        setToken(response.data.token);
-        console.log(response.data);
-        localStorage.setItem('token', JSON.stringify({ token: response.data.token }));
+    try {
+      const response = await fetch('https://marvelapp-dev-back.herokuapp.com/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: user
       });
+      const res = await response.json();
+      console.log(res);
+      setUser(true);
+      setOnOff('on');
+      setToken(res.data.token);
+      return localStorage.setItem('token', JSON.stringify({ token: res.data.token }));
+    } catch (error) {
+      // return console.log(error.code, error.message);
+      // return alert(error.message);
+    }
   }
 
   const validation = () => {

@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { useHistory } from 'react-router';
-import { authConfig } from '../../auth/config';
 import './style.css';
 
 function Join() {
@@ -9,12 +8,20 @@ function Join() {
   const passRef = useRef(null);
 
   const createUser = (email, password) => {
-    return authConfig.auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        alert('Bem-vindo ' + email);
-        history.push('/marvelcharacters');
+    const user = JSON.stringify({
+      email,
+      password
+    })
+
+    return (
+      fetch('https://marvelapp-dev-back.herokuapp.com/join', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: user
       })
+        .then(response => response.json())
+        .then(res => console.log(res))
+    )
       .catch((error) => {
         console.log(error.code, error.message);
         alert(error.message);
