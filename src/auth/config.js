@@ -12,5 +12,3 @@ export const authConfig = firebase.initializeApp({
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_FIREBASE_SENDER_ID,
 });
-
-// export const firebaseDb = authConfig.database().ref();

@@ -1,9 +1,9 @@
 import { useHistory } from 'react-router-dom';
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useState } from 'react';
+import axios from 'axios';
 import './style.css'
 import ContextMarvel from '../../Context/ContextMarvel';
-import { authConfig } from '../../auth/config';
-import { useState } from 'react';
+import { AuthContext } from '../../auth/Authcontext';
 
 function Login() {
   const history = useHistory();
@@ -11,8 +11,25 @@ function Login() {
   const passRef = useRef(null);
   
   const { setOnOff } = useContext(ContextMarvel);
-
+  const { setUser } = useContext(AuthContext);
   const [isNotValid, setIsNotValid] = useState(true);
+  const [token, setToken] = useState('');
+
+  const handleSubmit = () => {
+    const user = {
+      email: emailRef.current.value,
+      pass: passRef.current.value
+    };
+
+    axios.post('https://marvelapp-dev-back.herokuapp.com/', user)
+      .then(response => {
+        setUser(true);
+        setOnOff('on');
+        setToken(response.data.token);
+        console.log(response.data);
+        localStorage.setItem('token', JSON.stringify({ token: response.data.token }));
+      });
+  }
 
   const validation = () => {
     const reGex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
@@ -24,21 +41,10 @@ function Login() {
     return setIsNotValid(true);
   };
 
-  const loginAuth = (email, password) => {
-    authConfig.auth().signInWithEmailAndPassword(email, password)
-    .then(() => {
-      setOnOff('on');
-    })
-    .catch((error) => {
-      console.log(error.code, error.message);
-      return alert(error.message);
-    });
-  }
-
   return (
     <section>
       <div id="login">
-        <form method="post" action=""> 
+        <form> 
           <h1>Login</h1> 
           <p> 
             <label htmlFor="email_login">Seu e-mail</label>
@@ -53,7 +59,7 @@ function Login() {
               data-testid="email-input"
             />
           </p>
-           
+
           <p> 
             <label htmlFor="senha_login">Sua senha</label>
             <input
@@ -67,7 +73,7 @@ function Login() {
               data-testid="password-input"
             /> 
           </p>
-           
+
           <p> 
             <input type="checkbox" name="manterlogado" id="manterlogado" value="" /> 
             <label htmlFor="manterlogado">Manter-me logado</label>
@@ -79,9 +85,8 @@ function Login() {
             type="submit"
             value="Logar"
             disabled={ isNotValid }
-            onClick={(e) => {
-              e.preventDefault();
-              loginAuth(emailRef.current.value, passRef.current.value);
+            onClick={() => {
+              handleSubmit();
               history.push('/marvelcharacters');
               alert('Bem-vindo ' + emailRef.current.value);
             } }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, createContext } from 'react';
-import { authConfig } from './config';
+// import { authConfig } from './config';
 
 import './style.css';
 import imgLogo from '../Images/Marvel_Logo.svg.png';
@@ -11,10 +11,10 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    authConfig.auth().onAuthStateChanged((user) => {
-      setUser(user);
-      setLoading(false);
-    });
+    // authConfig.auth().onAuthStateChanged((user) => {
+    //   setUser(user);
+    // });
+    setLoading(false);
   }, []);
 
   if (loading) {
@@ -38,6 +38,6 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, setUser }}>{children}</AuthContext.Provider>
   );
 };
