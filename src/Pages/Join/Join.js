@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { useHistory } from 'react-router';
+
 import './style.css';
 
 function Join() {
@@ -7,20 +8,23 @@ function Join() {
   const emailRef = useRef(null);
   const passRef = useRef(null);
 
-  const createUser = (email, password) => {
+  const createUser = (email, pass) => {
     const user = JSON.stringify({
       email,
-      password
+      pass
     })
 
     return (
       fetch('https://marvelapp-dev-back.herokuapp.com/join', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: user
+        body: user,
       })
         .then(response => response.json())
-        .then(res => console.log(res))
+        .then(res => {
+          console.log(res);
+          return alert(res.message);
+        })
     )
       .catch((error) => {
         console.log(error.code, error.message);
@@ -32,19 +36,8 @@ function Join() {
     <section>
       <div id="cadastro">
         <form method="POST" action=""> 
-          <h1>Cadastro</h1> 
-           
-          {/* <p> 
-            <label htmlFor="nome_cad">Seu nome</label>
-            <input
-              id="nome_cad"
-              name="nome_cad"
-              type="text"
-              required
-              placeholder="ex. Fulano de Tal"
-            />
-          </p> */}
-           
+          <h1>Cadastro</h1>
+
           <p> 
             <label htmlFor="email_cad">Seu e-mail</label>
             <input
@@ -56,7 +49,7 @@ function Join() {
               ref={emailRef}
             /> 
           </p>
-           
+
           <p> 
             <label htmlFor="senha_cad">Sua senha</label>
             <input
@@ -76,11 +69,12 @@ function Join() {
             onClick={ (e) => {
               e.preventDefault();
               createUser(emailRef.current.value, passRef.current.value);
+              history.push('/');
             } }
           >
             Cadastrar
           </button>
-           
+
           <p className="link">  
             Já tem conta?
             <a href="/"> Ir para Login </a>
