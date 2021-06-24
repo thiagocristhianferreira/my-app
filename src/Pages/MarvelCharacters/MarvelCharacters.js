@@ -7,6 +7,7 @@ import { getCharacters } from '../../Services/marvelAPI';
 import Navbar from '../../Components/NavBar/NavBar';
 import './style.css';
 import FavoriteCharactersButton from '../../Components/FavoriteCharactersButton/FavoriteCharactersButton';
+import { AuthContext } from '../../auth/Authcontext';
 
 const MarvelCharacters = () => {
   const { 
@@ -14,7 +15,10 @@ const MarvelCharacters = () => {
     characters, setCharacters,
     setTitlePage,
     limitResultsApi, setLimitResultsApi,
+    setOnOff,
   } = useContext(ContextMarvel);
+
+  const { setUser } = useContext(AuthContext);
 
   const [searchTerm, setSearchTerm] = useState('');
   
@@ -26,8 +30,23 @@ const MarvelCharacters = () => {
       setLoading(false);
     }
     fetchCharacters();
+    verifyToken();
   }, [limitResultsApi, setCharacters, setLoading, setTitlePage]);
 
+  const verifyToken = async () => {
+    const token = JSON.parse(localStorage.getItem('token')).token;
+
+    const response = await fetch('https://marvelapp-dev-back.herokuapp.com/verify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+      },
+    });
+    const res = await response.json();
+    return res;
+  }
+  
   const fetchLimitCharacters = async () => {
     if (!searchTerm) {
       return false;

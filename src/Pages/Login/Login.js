@@ -1,9 +1,9 @@
 import { useHistory } from 'react-router-dom';
 import { useContext, useRef, useState } from 'react';
-import axios from 'axios';
-import './style.css'
+
 import ContextMarvel from '../../Context/ContextMarvel';
 import { AuthContext } from '../../auth/Authcontext';
+import './style.css'
 
 function Login() {
   const history = useHistory();
@@ -13,30 +13,21 @@ function Login() {
   const { setOnOff } = useContext(ContextMarvel);
   const { setUser } = useContext(AuthContext);
   const [isNotValid, setIsNotValid] = useState(true);
-  const [token, setToken] = useState('');
 
   const handleSubmit = async () => {
     const user = JSON.stringify({
       email: emailRef.current.value,
       pass: passRef.current.value
     });
-
-    try {
-      const response = await fetch('https://marvelapp-dev-back.herokuapp.com/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: user
-      });
-      const res = await response.json();
-      console.log(res);
-      setUser(true);
-      setOnOff('on');
-      setToken(res.data.token);
-      return localStorage.setItem('token', JSON.stringify({ token: res.data.token }));
-    } catch (error) {
-      // return console.log(error.code, error.message);
-      // return alert(error.message);
-    }
+    const response = await fetch('https://marvelapp-dev-back.herokuapp.com/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: user
+    });
+    const res = await response.json();
+    setUser(true);
+    setOnOff('on');
+    return localStorage.setItem('token', JSON.stringify({ token: res.token }));
   }
 
   const validation = () => {

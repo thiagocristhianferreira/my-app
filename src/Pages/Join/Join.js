@@ -15,9 +15,11 @@ function Join() {
     })
 
     return (
-      fetch('https://marvelapp-dev-back.herokuapp.com/join', {
+      fetch('http://localhost:3001/join', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: user,
       })
         .then(response => response.json())

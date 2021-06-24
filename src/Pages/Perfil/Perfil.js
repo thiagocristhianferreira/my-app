@@ -10,9 +10,10 @@ const Perfil = () => {
   const { 
     loading, setLoading,
     setTitlePage,
+    setOnOff,
   } = useContext(ContextMarvel);
 
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
 
   const [userNameDB, setUserNameDB] = useState('');
   const [userLastNameDB, setUserLastNameDB] = useState('');
@@ -22,12 +23,12 @@ const Perfil = () => {
   const [cellPhoneDB, setCellPhoneDB] = useState(0);
   const [userData, setUserData] = useState({});
 
-  useEffect(() => {
-    setTitlePage('Favoritos');
-    authConfig.firestore().collection('users').doc(user.uid)
-      .onSnapshot((doc) => setUserData(doc.data()));
-    setLoading(false);
-  }, [setLoading, setTitlePage, user.uid]);
+  // useEffect(() => {
+  //   setTitlePage('Favoritos');
+  //   authConfig.firestore().collection('users').doc(user.uid)
+  //     .onSnapshot((doc) => setUserData(doc.data()));
+  //   setLoading(false);
+  // }, [setLoading, setTitlePage, user.uid]);
 
   useEffect(() => {
     const fetchComics = async () => {
@@ -35,7 +36,23 @@ const Perfil = () => {
     }
     setTitlePage('Perfil');
     fetchComics();
+    verifyToken();
   }, [setLoading, setTitlePage]);
+
+  const verifyToken = async () => {
+    const token = JSON.parse(localStorage.getItem('token')).token;
+
+    const response = await fetch('https://marvelapp-dev-back.herokuapp.com/verify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+      },
+    });
+    const res = await response.json();
+    
+    return res;
+  }
 
   if (loading) {
     return (
