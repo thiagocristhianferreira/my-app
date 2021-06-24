@@ -6,7 +6,6 @@ import loadingGif from '../../Images/loading-buffering.gif';
 import { getComics } from '../../Services/marvelAPI';
 import Navbar from '../../Components/NavBar/NavBar';
 import FavoriteComicsButton from '../../Components/FavoriteComicsButton/FavoriteComicsButton';
-import { AuthContext } from '../../auth/Authcontext';
 
 const MarvelCharacters = () => {
   const { 
@@ -14,10 +13,7 @@ const MarvelCharacters = () => {
     loading, setLoading,
     setTitlePage,
     limitResultsApi, setLimitResultsApi,
-    setOnOff,
   } = useContext(ContextMarvel);
-
-  const { setUser } = useContext(AuthContext);
 
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -33,7 +29,7 @@ const MarvelCharacters = () => {
   }, [limitResultsApi, setComics, setLoading, setTitlePage]);
 
   const verifyToken = async () => {
-    const token = JSON.parse(localStorage.getItem('token')).token;
+    const token = await JSON.parse(localStorage.getItem('token')).token;
 
     const response = await fetch('https://marvelapp-dev-back.herokuapp.com/verify', {
       method: 'POST',
@@ -42,9 +38,8 @@ const MarvelCharacters = () => {
         'Authorization': token,
       },
     });
-    const res = await response.json();
     
-    return res;
+    return await response.json();
   }
 
   const fetchLimitCharacters = async () => {

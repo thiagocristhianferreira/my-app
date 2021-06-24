@@ -86,6 +86,7 @@ function Login() {
             disabled={ isNotValid }
             onClick={() => {
               handleSubmit();
+              setUser(true);
               history.push('/marvelcharacters');
               alert('Bem-vindo ' + emailRef.current.value);
             } }

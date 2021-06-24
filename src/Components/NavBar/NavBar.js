@@ -17,16 +17,16 @@ function Navbar() {
   const { 
     titlePage,
     onOff,
+    setOnOff,
   } = useContext(ContextMarvel);
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
-
-  const { setOnOff } = useContext(ContextMarvel);
 
   const logoutOff = () => {
     authConfig.auth().signOut()
     .then(() => {
       setOnOff('');
+      localStorage.clear();
     })
     .catch((error) => {
       console.log(error.code, error.message);
