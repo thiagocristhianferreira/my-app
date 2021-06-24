@@ -5,16 +5,12 @@ import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
 import FavoriteCharacterComponent from '../../Components/FavoriteCharactersComponent/FavoriteCharacterComponent';
 import FavoriteComicComponent from '../../Components/FavoriteComicComponent/FavoriteComicComponent';
-import { AuthContext } from '../../auth/Authcontext';
 
 const Favorites = () => {
   const { 
     loading, setLoading,
     setTitlePage,
-    setOnOff,
   } = useContext(ContextMarvel);
-
-  const { setUser } = useContext(AuthContext);
 
   useEffect(() => {
     setTitlePage('Favoritos');

@@ -18,8 +18,8 @@ const FavoriteCharacterComponent = () => {
   const [favoritesCharacters, setFavoritesCharacters] = useState([]);
 
   useEffect(() => {
-    // authConfig.firestore().collection('favoritesCharacters').doc(user.uid)
-    //   .onSnapshot((doc) => setFavoritesCharacters(doc.data().favoritesCharacters));
+    authConfig.firestore().collection('favoritesCharacters').doc(user.uid)
+      .onSnapshot((doc) => setFavoritesCharacters(doc.data().favoritesCharacters));
     setTitlePage('Favoritos');
     setLoading(false);
   }, [setLoading, setTitlePage, user.uid]);
