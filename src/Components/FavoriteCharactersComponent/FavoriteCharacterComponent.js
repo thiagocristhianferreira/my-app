@@ -39,6 +39,26 @@ const FavoriteCharacterComponent = () => {
     return setFavoritesCharacters(result.favoritesCharacters);
   }
 
+  const postFavoritesCharacters = async (array) => {
+    const token = await JSON.parse(localStorage.getItem('token')).token;
+
+    const headers = new fetch.Headers({
+      'Content-Type': 'application/json',
+      'Authorization': token,
+    });
+
+    const body = JSON.stringify(array);
+
+    const response = await fetch('https://marvelapp-dev-back.herokuapp.com/favoritescharacters', {
+      method: 'POST',
+      headers,
+      body,
+    });
+    return await response.json()
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+  }
+
   if (loading) {
     return (
       <img
@@ -83,8 +103,8 @@ const FavoriteCharacterComponent = () => {
                       onClick={ () => {
                         const favoritesFiltered = favoritesCharacters
                           .filter((item) => item.id !== id);
-                        return authConfig.firestore().collection('favoritesCharacters')
-                          .doc(user.uid).set({ favoritesCharacters: favoritesFiltered, });
+                        setFavoritesCharacters(favoritesFiltered);
+                        return postFavoritesCharacters(favoritesFiltered);
                       } }
                     >
                       <img

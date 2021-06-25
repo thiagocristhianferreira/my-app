@@ -3,9 +3,8 @@ import { Card } from 'react-bootstrap';
 
 import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
-import { authConfig } from '../../auth/config';
 import { AuthContext } from '../../auth/Authcontext';
-// import favoriteOn from '../../Images/favorite-on.png';
+import favoriteOn from '../../Images/favorite-on.png';
 
 const FavoriteCharacterComponent = () => {
   const { 
@@ -17,11 +16,7 @@ const FavoriteCharacterComponent = () => {
 
   const [favoritesComics, setFavoritesComics] = useState([]);
 
-  // console.log(favoritesComics)
-
   useEffect(() => {
-    // authConfig.firestore().collection('favoritesComics').doc(user.uid)
-    //   .onSnapshot((doc) => setFavoritesComics(doc.data().favoritesComics));
     fetchFavoritesComics();
     setTitlePage('Favoritos');
     setLoading(false);
@@ -39,9 +34,30 @@ const FavoriteCharacterComponent = () => {
     });
     
     const result = await response.json();
-    // console.log(result);
 
-    // return setFavoritesComics(favoritesComics);
+    console.log(result.favoritesComics);
+
+    return setFavoritesComics(result.favoritesComics);
+  }
+
+  const postFavoritesComics = async (array) => {
+    const token = await JSON.parse(localStorage.getItem('token')).token;
+
+    const headers = new fetch.Headers({
+      'Content-Type': 'application/json',
+      'Authorization': token,
+    });
+
+    const body = JSON.stringify(array);
+
+    const response = await fetch('https://marvelapp-dev-back.herokuapp.com/favoritescomics', {
+      method: 'POST',
+      headers,
+      body,
+    });
+    return await response.json()
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
   }
 
   if (loading) {
@@ -80,15 +96,15 @@ const FavoriteCharacterComponent = () => {
                       onClick={ () => {
                         const favoritesFiltered = favoritesComics
                           .filter((item) => item.id !== id);
-                        return authConfig.firestore().collection('favoritesComics')
-                          .doc(user.uid).set({ favoritesComics: (favoritesFiltered) });
+                        setFavoritesComics(favoritesFiltered);
+                        return postFavoritesComics(favoritesFiltered);
                       } }
                     >
-                      {/* <img
+                      <img
                         src={ favoriteOn }
                         alt="Favorite"
                         style={ { width: "30px" } }
-                      /> */}
+                      />
                     </button>
                     </Card.Subtitle>
                     <Card.Text>{ description }</Card.Text>
