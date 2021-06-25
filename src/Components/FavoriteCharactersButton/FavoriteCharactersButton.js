@@ -1,12 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 
 import favoriteOff from '../../Images/favorite-off.png';
 import favoriteOn from '../../Images/favorite-on.png';
-import { authConfig } from '../../auth/config';
-import { AuthContext } from '../../auth/Authcontext';
 
 const FavoriteCharactersButton = (props) => {
-  const { user } = useContext(AuthContext);
   const [favoriteOnOff, setFavoriteOnOff] = useState(false);
 
   const {
@@ -23,33 +20,39 @@ const FavoriteCharactersButton = (props) => {
       if (fav.find(item => item.id === id)) {
         const favoritesFiltered = fav
           .filter((item) => item.id !== id);
-        localStorage.setItem(
-          'favoritesCharacters',
-          JSON.stringify(favoritesFiltered),
-        );
-        authConfig.firestore().collection('favoritesCharacters')
-          .doc(user.uid).set({ favoritesCharacters: (favoritesFiltered) });
+        localStorage.setItem('favoritesCharacters', JSON.stringify(favoritesFiltered));
+        postFavoritesCharacters(favoritesFiltered);
         return setFavoriteOnOff(false);
       } else {
-        localStorage.setItem(
-          'favoritesCharacters',
-          JSON.stringify([...fav, data]),
-        );
-        console.log([...fav, data])
-        authConfig.firestore().collection('favoritesCharacters')
-          .doc(user.uid).set({ favoritesCharacters: ([...fav, data]) });
-        console.log([...fav, data])
+        localStorage.setItem('favoritesCharacters', JSON.stringify([...fav, data]));
+        postFavoritesCharacters([...fav, data])
         return setFavoriteOnOff(true);
       }
     } else {
-      localStorage.setItem(
-        'favoritesCharacters',
-        JSON.stringify([data]),
-      );
-      authConfig.firestore().collection('favoritesCharacters')
-          .doc(user.uid).set({ favoritesCharacters: ([data]) });
+      localStorage.setItem('favoritesCharacters', JSON.stringify([data]));
+      postFavoritesCharacters([data]);
       return setFavoriteOnOff(true);
     }
+  }
+
+  const postFavoritesCharacters = async (array) => {
+    const token = await JSON.parse(localStorage.getItem('token')).token;
+
+    const headers = new fetch.Headers({
+      'Content-Type': 'application/json',
+      'Authorization': token,
+    });
+
+    const body = JSON.stringify(array);
+
+    const response = await fetch('http://localhost:3001/favoritescharacters', {
+      method: 'POST',
+      headers,
+      body,
+    });
+    return await response.json()
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
   }
 
   return (

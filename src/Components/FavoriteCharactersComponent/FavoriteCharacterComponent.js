@@ -18,11 +18,26 @@ const FavoriteCharacterComponent = () => {
   const [favoritesCharacters, setFavoritesCharacters] = useState([]);
 
   useEffect(() => {
-    authConfig.firestore().collection('favoritesCharacters').doc(user.uid)
-      .onSnapshot((doc) => setFavoritesCharacters(doc.data().favoritesCharacters));
+    fetchFavoritesCharacters();
     setTitlePage('Favoritos');
     setLoading(false);
   }, [setLoading, setTitlePage, user.uid]);
+
+  const fetchFavoritesCharacters = async () => {
+    const token = await JSON.parse(localStorage.getItem('token')).token;
+
+    const response = await fetch('https://marvelapp-dev-back.herokuapp.com/favoritescharacters', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+      },
+    });
+    
+    const result = await response.json();
+
+    return setFavoritesCharacters(result.favoritesCharacters);
+  }
 
   if (loading) {
     return (

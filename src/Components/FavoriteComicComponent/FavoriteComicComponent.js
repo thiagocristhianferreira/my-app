@@ -5,7 +5,7 @@ import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
 import { authConfig } from '../../auth/config';
 import { AuthContext } from '../../auth/Authcontext';
-import favoriteOn from '../../Images/favorite-on.png';
+// import favoriteOn from '../../Images/favorite-on.png';
 
 const FavoriteCharacterComponent = () => {
   const { 
@@ -17,12 +17,32 @@ const FavoriteCharacterComponent = () => {
 
   const [favoritesComics, setFavoritesComics] = useState([]);
 
+  // console.log(favoritesComics)
+
   useEffect(() => {
-    authConfig.firestore().collection('favoritesComics').doc(user.uid)
-      .onSnapshot((doc) => setFavoritesComics(doc.data().favoritesComics));
+    // authConfig.firestore().collection('favoritesComics').doc(user.uid)
+    //   .onSnapshot((doc) => setFavoritesComics(doc.data().favoritesComics));
+    fetchFavoritesComics();
     setTitlePage('Favoritos');
     setLoading(false);
   }, [setLoading, setTitlePage, user.uid]);
+
+  const fetchFavoritesComics = async () => {
+    const token = await JSON.parse(localStorage.getItem('token')).token;
+
+    const response = await fetch('https://marvelapp-dev-back.herokuapp.com/favoritescomics', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+      },
+    });
+    
+    const result = await response.json();
+    // console.log(result);
+
+    // return setFavoritesComics(favoritesComics);
+  }
 
   if (loading) {
     return (
@@ -64,11 +84,11 @@ const FavoriteCharacterComponent = () => {
                           .doc(user.uid).set({ favoritesComics: (favoritesFiltered) });
                       } }
                     >
-                      <img
+                      {/* <img
                         src={ favoriteOn }
                         alt="Favorite"
                         style={ { width: "30px" } }
-                      />
+                      /> */}
                     </button>
                     </Card.Subtitle>
                     <Card.Text>{ description }</Card.Text>
