@@ -45,7 +45,7 @@ const FavoriteCharactersButton = (props) => {
 
     const body = JSON.stringify(array);
 
-    const response = await fetch('http://localhost:3001/favoritescharacters', {
+    const response = await fetch('https://marvelapp-dev-back.herokuapp.com/favoritescharacters', {
       method: 'POST',
       headers,
       body,
