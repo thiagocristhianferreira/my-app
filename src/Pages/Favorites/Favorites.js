@@ -21,7 +21,7 @@ const Favorites = () => {
   const verifyToken = async () => {
     const token = JSON.parse(localStorage.getItem('token')).token;
 
-    const response = await fetch('https://marvelapp-dev-back.herokuapp.com/verify', {
+    const response = await fetch(`${process.env.REACT_APP_FETCH}verify`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

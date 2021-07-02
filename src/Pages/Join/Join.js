@@ -15,7 +15,7 @@ function Join() {
     })
 
     return (
-      fetch('http://localhost:3001/join', {
+      fetch(`${process.env.REACT_APP_FETCH}join`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -3,8 +3,6 @@ import { Card } from 'react-bootstrap';
 
 import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
-import { authConfig } from '../../auth/config';
-import { AuthContext } from '../../auth/Authcontext';
 import favoriteOn from '../../Images/favorite-on.png';
 
 const FavoriteCharacterComponent = () => {
@@ -13,20 +11,18 @@ const FavoriteCharacterComponent = () => {
     setTitlePage,
   } = useContext(ContextMarvel);
 
-  const { user } = useContext(AuthContext);
-
   const [favoritesCharacters, setFavoritesCharacters] = useState([]);
 
   useEffect(() => {
     fetchFavoritesCharacters();
     setTitlePage('Favoritos');
     setLoading(false);
-  }, [setLoading, setTitlePage, user.uid]);
+  }, [setLoading, setTitlePage]);
 
   const fetchFavoritesCharacters = async () => {
     const token = await JSON.parse(localStorage.getItem('token')).token;
 
-    const response = await fetch('https://marvelapp-dev-back.herokuapp.com/favoritescharacters', {
+    const response = await fetch(`${process.env.REACT_APP_FETCH}favoritescharacters`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +32,7 @@ const FavoriteCharacterComponent = () => {
     
     const result = await response.json();
 
-    return setFavoritesCharacters(result.favoritesCharacters);
+    return setFavoritesCharacters(result);
   }
 
   const postFavoritesCharacters = async (array) => {
@@ -49,7 +45,7 @@ const FavoriteCharacterComponent = () => {
 
     const body = JSON.stringify(array);
 
-    const response = await fetch('https://marvelapp-dev-back.herokuapp.com/favoritescharacters', {
+    const response = await fetch(`${process.env.REACT_APP_FETCH}favoritescharacters`, {
       method: 'POST',
       headers,
       body,

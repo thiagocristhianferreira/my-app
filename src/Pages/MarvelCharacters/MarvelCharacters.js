@@ -19,20 +19,20 @@ const MarvelCharacters = () => {
   const [searchTerm, setSearchTerm] = useState('');
   
   useEffect(() => {
-    setTitlePage('Marvel Characters');
     const fetchCharacters = async () => {
       const result = await getCharacters(limitResultsApi);
       setCharacters(result);
       setLoading(false);
+      await verifyToken();
     }
+    setTitlePage('Marvel Characters');
     fetchCharacters();
-    verifyToken();
   }, [limitResultsApi, setCharacters, setLoading, setTitlePage]);
 
   const verifyToken = async () => {
     const token = await JSON.parse(localStorage.getItem('token')).token;
 
-    const response = await fetch('https://marvelapp-dev-back.herokuapp.com/verify', {
+    const response = await fetch(`${process.env.REACT_APP_FETCH}verify`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

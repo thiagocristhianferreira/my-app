@@ -27,6 +27,26 @@ const FavoriteComicsButton = (props) => {
     id, title, desc, thumbnail: { extension, path }
   }
 
+  useEffect(() => {
+    const fetchFavoritesComics = async () => {
+      const token = await JSON.parse(localStorage.getItem('token')).token;
+  
+      const response = await fetch(`${process.env.REACT_APP_FETCH}favoritescomics`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token,
+        },
+      });
+      const result = await response.json();
+      const favorited = await result.map((res) => res.id);
+      const verifFavorites = await favorited.includes(props.favorite.id);
+      if (verifFavorites) return setFavoriteOnOff(true);
+      return result.favoritesComics;
+    }
+    fetchFavoritesComics();
+  }, []);
+
   const favoriting = () => {
     const fav = JSON.parse(localStorage.getItem('favoritesComics'));
     if (fav) {
@@ -58,7 +78,7 @@ const FavoriteComicsButton = (props) => {
 
     const body = JSON.stringify(array);
 
-    const response = await fetch('https://marvelapp-dev-back.herokuapp.com/favoritescomics', {
+    const response = await fetch(`${process.env.REACT_APP_FETCH}favoritescomics`, {
       method: 'POST',
       headers,
       body,

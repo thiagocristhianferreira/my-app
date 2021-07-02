@@ -19,7 +19,7 @@ function Login() {
       email: emailRef.current.value,
       pass: passRef.current.value
     });
-    const response = await fetch('https://marvelapp-dev-back.herokuapp.com/', {
+    const response = await fetch(`${process.env.REACT_APP_FETCH}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: user
