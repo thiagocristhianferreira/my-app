@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Card, Form, Modal, Button  } from 'react-bootstrap';
-// import Modal from 'react-bootstrap/Modal'
 
 import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';

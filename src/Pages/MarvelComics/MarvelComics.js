@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Card, Form, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Card, Form, ListGroup, ListGroupItem, Modal, Button } from 'react-bootstrap';
 
 import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
@@ -100,14 +100,44 @@ const MarvelCharacters = () => {
             title, description, id, thumbnail: { extension, path }
           }
           const creators = comic.creators.items;
+
+          const Details = () => {
+            const [show, setShow] = useState(false);
+            const handleClose = () => setShow(false);
+            const handleShow = () => setShow(true);
+          
+            return (
+              <div>
+                <Button variant="primary" onClick={handleShow}>Details</Button>
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header>
+                    <Modal.Title>{title}</Modal.Title>
+                    <Button variant="secondary" onClick={handleClose}>X</Button>
+                  </Modal.Header>
+                    <Modal.Body>{`Characters Avaliable: ${comic.characters.available}`}</Modal.Body>
+                    <Modal.Body>{`Creators Avaliable: ${comic.creators.available}`}</Modal.Body>
+                    <Modal.Body>{`Events Avaliable: ${comic.events.available}`}</Modal.Body>
+                    <Modal.Body>{`Modified: ${comic.modified}`}</Modal.Body>
+                    <Modal.Body>{`Prices: ${comic.prices[0].price}`}</Modal.Body>
+                    <Modal.Body>{`Series Name: ${comic.series.name}`}</Modal.Body>
+                    <Modal.Body>{`Stories Avaliable: ${comic.stories.available}`}</Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="primary" onClick={handleClose}>Close</Button>
+                  </Modal.Footer>
+                </Modal>
+              </div>
+            );
+          }
+
           return (
             <Card key={ id } className="m-4" style={{ width: '18rem' }}>
               <Card.Img variant="top" src={`${path}.${extension}`} />
               <Card.Body>
                 <Card.Title>{title}</Card.Title>
-                <FavoriteComicsButton
-                  favorite={ dataFavorites }
-                />
+                <Card.Subtitle className="d-flex justify-content-around">
+                  <Details />
+                  <FavoriteComicsButton favorite={ dataFavorites } />
+                </Card.Subtitle>
                 <Card.Text>
                   { description }
                 </Card.Text>
@@ -161,14 +191,44 @@ const MarvelCharacters = () => {
         const dataFavorites = {
           title, description, id, thumbnail: { extension, path }
         }
+
+        const Details = () => {
+          const [show, setShow] = useState(false);
+          const handleClose = () => setShow(false);
+          const handleShow = () => setShow(true);
+        
+          return (
+            <div>
+              <Button variant="primary" onClick={handleShow}>Details</Button>
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header>
+                  <Modal.Title>{title}</Modal.Title>
+                  <Button variant="secondary" onClick={handleClose}>X</Button>
+                </Modal.Header>
+                  <Modal.Body>{`Characters Avaliable: ${comic.characters.available}`}</Modal.Body>
+                  <Modal.Body>{`Creators Avaliable: ${comic.creators.available}`}</Modal.Body>
+                  <Modal.Body>{`Events Avaliable: ${comic.events.available}`}</Modal.Body>
+                  <Modal.Body>{`Modified: ${comic.modified}`}</Modal.Body>
+                  <Modal.Body>{`Prices: ${comic.prices[0].price}`}</Modal.Body>
+                  <Modal.Body>{`Series Name: ${comic.series.name}`}</Modal.Body>
+                  <Modal.Body>{`Stories Avaliable: ${comic.stories.available}`}</Modal.Body>
+                <Modal.Footer>
+                  <Button variant="primary" onClick={handleClose}>Close</Button>
+                </Modal.Footer>
+              </Modal>
+            </div>
+          );
+        }
+
         return (
           <Card key={ id } className="m-4" style={{ width: '18rem' }}>
             <Card.Img variant="top" src={`${path}.${extension}`} />
             <Card.Body>
               <Card.Title>{title}</Card.Title>
-              <FavoriteComicsButton
-                  favorite={ dataFavorites }
-                />
+              <Card.Subtitle className="d-flex justify-content-around">
+                <Details />
+                <FavoriteComicsButton favorite={ dataFavorites } />
+              </Card.Subtitle>
               <Card.Text>
                 { description }
               </Card.Text>
