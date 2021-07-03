@@ -23,24 +23,28 @@ const Perfil = () => {
   const [cellPhoneDB, setCellPhoneDB] = useState(0);
   const [userData, setUserData] = useState({});
 
-  // useEffect(() => {
-  //   setTitlePage('Favoritos');
-  //   authConfig.firestore().collection('users').doc(user.uid)
-  //     .onSnapshot((doc) => setUserData(doc.data()));
-  //   setLoading(false);
-  // }, [setLoading, setTitlePage, user.uid]);
-
   useEffect(() => {
-    const fetchComics = async () => {
-      setLoading(false);
-    }
     setTitlePage('Perfil');
-    fetchComics();
+    setLoading(false);
     verifyToken();
+    const fetchUserData = async () => {
+      const { token } = await JSON.parse(localStorage.getItem('token'));
+      const response = await fetch(`${process.env.REACT_APP_FETCH}userinfos`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token,
+        },
+      });
+
+    const res = await response.json();
+    return setUserData(res);
+    }
+    fetchUserData();
   }, [setLoading, setTitlePage]);
 
   const verifyToken = async () => {
-    const token = JSON.parse(localStorage.getItem('token')).token;
+    const { token } = await JSON.parse(localStorage.getItem('token'));
 
     const response = await fetch(`${process.env.REACT_APP_FETCH}verify`, {
       method: 'POST',
@@ -63,13 +67,24 @@ const Perfil = () => {
     )
   }
 
-  const updateUserData = () => {
-    authConfig.firestore().collection('users')
-      .doc(user.uid).set({
-        user: { name: userNameDB, lastName: userLastNameDB },
-        address: { cep: cepDB, city: cityDB, state: stateDB },
-        cellphone: cellPhoneDB
-      });
+  const updateUserData = async () => {
+    const { token } = await JSON.parse(localStorage.getItem('token'));
+    const response = await fetch(`${process.env.REACT_APP_FETCH}userinfos`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+      },
+      body: {
+        firstName: userNameDB,
+        lastName: userLastNameDB,
+        phone: cellPhoneDB,
+        city: cityDB,
+        state: stateDB,
+        CEP: cepDB,
+      }
+    });
+    return response;
   }
 
   return (
@@ -82,7 +97,7 @@ const Perfil = () => {
             <label htmlFor="validationCustom01">Primeiro nome</label>
             <input
               type="text"
-              placeholder={ Object.keys(userData).length > 0 ? userData.user.name : 'Loading...' }
+              placeholder={ Object.keys(userData).length > 0 ? userData.firstName : 'Loading...' }
               required
               onChange={ (e) => setUserNameDB(e.target.value) }
             />
@@ -94,7 +109,7 @@ const Perfil = () => {
             <label htmlFor="validationCustom02">Sobrenome</label>
             <input
               type="text"
-              placeholder={ Object.keys(userData).length > 0 ? userData.user.lastName : 'Loading...' }
+              placeholder={ Object.keys(userData).length > 0 ? userData.lastName : 'Loading...' }
               required
               onChange={ (e) => setUserLastNameDB(e.target.value) }
             />
@@ -107,7 +122,7 @@ const Perfil = () => {
               <input
                 type="text"
                 required
-                value={ user.email }
+                value={ userData.email }
                 readOnly
               />
               <div className="invalid-feedback">
@@ -122,7 +137,7 @@ const Perfil = () => {
               </div>
               <input
                 type="number"
-                placeholder={ userData.cellphone }
+                placeholder={ userData.phone }
                 onChange={ (e) => setCellPhoneDB(e.target.value) }
               />
               <div className="invalid-feedback">
@@ -136,7 +151,7 @@ const Perfil = () => {
             <label htmlFor="validationCustom03">Cidade</label>
             <input
               type="text"
-              placeholder={ Object.keys(userData).length > 0 ? userData.address.city : 'Loading...' }
+              placeholder={ Object.keys(userData).length > 0 ? userData.city : 'Loading...' }
               required
               onChange={ (e) => setSetCityDB(e.target.value) }
             />
@@ -148,7 +163,7 @@ const Perfil = () => {
             <label htmlFor="validationCustom04">Estado</label>
             <input
               type="text"
-              placeholder={ Object.keys(userData).length > 0 ? userData.address.state : 'Loading...' }
+              placeholder={ Object.keys(userData).length > 0 ? userData.state : 'Loading...' }
               required
               onChange={ (e) => setStateDB(e.target.value) }
             />
@@ -160,7 +175,7 @@ const Perfil = () => {
             <label htmlFor="validationCustom05">CEP</label>
             <input
               type="text"
-              placeholder={ Object.keys(userData).length > 0 ? userData.address.cep : 'Loading...' }
+              placeholder={ Object.keys(userData).length > 0 ? userData.CEP : 'Loading...' }
               onChange={ (e) => setCepDB(e.target.value) }
             />
             <div className="invalid-feedback">
