@@ -32,7 +32,7 @@ const FavoriteCharactersButton = (props) => {
       return result.favoritesCharacters;
     }
     fetchFavoritesCharacters();
-  }, []);
+  }, [props.favorite.id]);
 
 
   const favoriting = () => {

@@ -39,13 +39,16 @@ const FavoriteComicsButton = (props) => {
         },
       });
       const result = await response.json();
+
+      localStorage.setItem('favoritesComics', JSON.stringify(result));
+      
       const favorited = await result.map((res) => res.id);
       const verifFavorites = await favorited.includes(props.favorite.id);
       if (verifFavorites) return setFavoriteOnOff(true);
       return result.favoritesComics;
     }
     fetchFavoritesComics();
-  }, []);
+  }, [props.favorite.id]);
 
   const favoriting = () => {
     const fav = JSON.parse(localStorage.getItem('favoritesComics'));

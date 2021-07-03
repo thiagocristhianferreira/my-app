@@ -31,7 +31,7 @@ const FavoriteCharacterComponent = () => {
     });
     
     const result = await response.json();
-
+    localStorage.setItem('favoritesCharacters', JSON.stringify(result));
     return setFavoritesCharacters(result);
   }
 

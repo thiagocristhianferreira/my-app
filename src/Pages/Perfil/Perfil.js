@@ -3,17 +3,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
 import Navbar from '../../Components/NavBar/NavBar';
-import { AuthContext } from '../../auth/Authcontext';
-import { authConfig } from '../../auth/config';
 
 const Perfil = () => {
   const { 
     loading, setLoading,
     setTitlePage,
-    setOnOff,
   } = useContext(ContextMarvel);
-
-  const { user, setUser } = useContext(AuthContext);
 
   const [userNameDB, setUserNameDB] = useState('');
   const [userLastNameDB, setUserLastNameDB] = useState('');
@@ -36,9 +31,9 @@ const Perfil = () => {
           'Authorization': token,
         },
       });
-
-    const res = await response.json();
-    return setUserData(res);
+      
+      const res = await response.json();
+      return setUserData(res);
     }
     fetchUserData();
   }, [setLoading, setTitlePage]);
@@ -58,6 +53,28 @@ const Perfil = () => {
     return res;
   }
 
+  const updateUserData = async () => {
+    const { token } = await JSON.parse(localStorage.getItem('token'));
+    const body = JSON.stringify({
+      firstName: userNameDB,
+      lastName: userLastNameDB,
+      phone: cellPhoneDB,
+      city: cityDB,
+      state: stateDB,
+      CEP: cepDB,
+    })
+    const response = await fetch(`${process.env.REACT_APP_FETCH}userinfos`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+      },
+      body,
+    });
+    alert('Dados Atualizados');
+    return response;
+  }
+
   if (loading) {
     return (
       <img
@@ -67,30 +84,10 @@ const Perfil = () => {
     )
   }
 
-  const updateUserData = async () => {
-    const { token } = await JSON.parse(localStorage.getItem('token'));
-    const response = await fetch(`${process.env.REACT_APP_FETCH}userinfos`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': token,
-      },
-      body: {
-        firstName: userNameDB,
-        lastName: userLastNameDB,
-        phone: cellPhoneDB,
-        city: cityDB,
-        state: stateDB,
-        CEP: cepDB,
-      }
-    });
-    return response;
-  }
-
   return (
     <section className="w-100 bg-dark">
       <Navbar />
-      <h1>{ user.email }</h1>
+      <h1>{ userData.email }</h1>
       <form className="needs-validation" noValidate>
         <div className="form-row">
           <div className="col-md-4 mb-3">
