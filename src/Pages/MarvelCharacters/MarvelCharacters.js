@@ -185,11 +185,39 @@ const MarvelCharacters = (props) => {
             const dataFavorites = {
               name, description, id, thumbnail: { extension, path }
             }
+
+            const Details = () => {
+              const [show, setShow] = useState(false);
+              const handleClose = () => setShow(false);
+              const handleShow = () => setShow(true);
+            
+              return (
+                <div>
+                  <Button variant="primary" onClick={handleShow}>Details</Button>
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header>
+                      <Modal.Title>{name}</Modal.Title>
+                      <Button variant="secondary" onClick={handleClose}>X</Button>
+                    </Modal.Header>
+                      <Modal.Body>{`Comics Avaliable: ${character.comics.available}`}</Modal.Body>
+                      <Modal.Body>{`Events Avaliable: ${character.events.available}`}</Modal.Body>
+                      <Modal.Body>{`Modified: ${character.modified}`}</Modal.Body>
+                      <Modal.Body>{`Series Avaliable: ${character.series.available}`}</Modal.Body>
+                      <Modal.Body>{`Stories Avaliable: ${character.stories.available}`}</Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="primary" onClick={handleClose}>Close</Button>
+                    </Modal.Footer>
+                  </Modal>
+                </div>
+              );
+            }
+
             return (
               <Card key={ id } className="m-4" style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={`${path}.${extension}`} />
                 <Card.Body>
                   <Card.Title>{name}</Card.Title>
+                  <Details />
                   <FavoriteCharactersButton favorite={ dataFavorites } />
                   <Card.Text>{ description }</Card.Text>
                 </Card.Body>
