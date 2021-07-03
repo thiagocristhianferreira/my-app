@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Card, Form  } from 'react-bootstrap';
+import { Card, Form, Modal, Button  } from 'react-bootstrap';
+// import Modal from 'react-bootstrap/Modal'
 
 import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
@@ -8,7 +9,7 @@ import Navbar from '../../Components/NavBar/NavBar';
 import './style.css';
 import FavoriteCharactersButton from '../../Components/FavoriteCharactersButton/FavoriteCharactersButton';
 
-const MarvelCharacters = () => {
+const MarvelCharacters = (props) => {
   const { 
     loading, setLoading,
     characters, setCharacters,
@@ -17,6 +18,8 @@ const MarvelCharacters = () => {
   } = useContext(ContextMarvel);
 
   const [searchTerm, setSearchTerm] = useState('');
+
+  
   
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -102,12 +105,39 @@ const MarvelCharacters = () => {
               const dataFavorites = {
                 name, description, id, thumbnail: { extension, path }
               }
+              const Details = () => {
+                const [show, setShow] = useState(false);
+                const handleClose = () => setShow(false);
+                const handleShow = () => setShow(true);
+              
+                return (
+                  <div>
+                    <Button variant="primary" onClick={handleShow}>Details</Button>
+                    <Modal show={show} onHide={handleClose}>
+                      <Modal.Header>
+                        <Modal.Title>{name}</Modal.Title>
+                        <Button variant="secondary" onClick={handleClose}>X</Button>
+                      </Modal.Header>
+                        <Modal.Body>{`Comics Avaliable: ${character.comics.available}`}</Modal.Body>
+                        <Modal.Body>{`Events Avaliable: ${character.events.available}`}</Modal.Body>
+                        <Modal.Body>{`Modified: ${character.modified}`}</Modal.Body>
+                        <Modal.Body>{`Series Avaliable: ${character.series.available}`}</Modal.Body>
+                        <Modal.Body>{`Stories Avaliable: ${character.stories.available}`}</Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="primary" onClick={handleClose}>Close</Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </div>
+                );
+              }
+
               return (
                 <Card key={ id } className="m-4" style={{ width: '18rem' }}>
                   <Card.Img variant="top" src={`${path}.${extension}`} />
                   <Card.Body>
                     <Card.Title>{name}</Card.Title>
-                    <Card.Subtitle className="d-flex justify-content-end">
+                    <Card.Subtitle className="d-flex justify-content-around">
+                      <Details />
                       <FavoriteCharactersButton favorite={ dataFavorites } />
                     </Card.Subtitle>
                     <Card.Text>{ description }</Card.Text>
