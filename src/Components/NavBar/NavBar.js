@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { authConfig } from '../../auth/config';
 import { IconContext } from 'react-icons';
 import * as IoIcons from 'react-icons/io';
 import { RiLogoutBoxFill } from 'react-icons/ri';
@@ -17,22 +16,9 @@ function Navbar() {
   const { 
     titlePage,
     onOff,
-    setOnOff,
   } = useContext(ContextMarvel);
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
-
-  const logoutOff = () => {
-    authConfig.auth().signOut()
-    .then(() => {
-      setOnOff('');
-      localStorage.clear();
-    })
-    .catch((error) => {
-      console.log(error.code, error.message);
-      return alert(error.message);
-    });
-  }
 
   return (
     <>
@@ -94,7 +80,6 @@ function Navbar() {
               className={'nav-text'}
               onClick={ (e) => {
                 e.preventDefault();
-                logoutOff();
                 history.push('/');
                 alert('Até logo :)');
               } }
