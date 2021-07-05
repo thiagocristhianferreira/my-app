@@ -7,19 +7,20 @@
 <h2>Desafio Técnico realizado para a empresa : Stone</h2>
 
 ## Descrição:
-APLICAÇÃO DE PRODUÇÃO (Front-end):
-[Marvel APP](https://marvelapp-thiagocristhian.herokuapp.com/ "Marvel APP")
-[Repositório Git](https://github.com/thiagocristhianferreira/my-app)
-APLICAÇÃO DE PRODUÇÃO (Back-end):
-[API - Back-end - PRODUÇÃO](https://marvelapp-prod-back.herokuapp.com/ "API - Back-end - PRODUÇÃO")
-[Repositório Git](https://github.com/thiagocristhianferreira/my-app-backend)
 
-APLICAÇÃO DE DESENVOLVIMENTO (Front-end):
-[Marvel APP](https://marvelapp-development-thiagoc.herokuapp.com/ "Marvel APP")
-[Repositório Git](https://github.com/thiagocristhianferreira/my-app)
-APLICAÇÃO DE DESENVOLVIMENTO (Back-end):
-[API - Back-end - DESENVOLVIMENTO](https://marvelapp-dev-back.herokuapp.com/ "API - Back-end - DESENVOLVIMENTO")
-[Repositório Git](https://github.com/thiagocristhianferreira/my-app-backend)
+### APLICAÇÃO DE PRODUÇÃO (Front-end):
+#### [Marvel APP](https://marvelapp-thiagocristhian.herokuapp.com/ "Marvel APP")
+#### [Repositório Git](https://github.com/thiagocristhianferreira/my-app)
+### APLICAÇÃO DE PRODUÇÃO (Back-end):
+#### [API - Back-end - PRODUÇÃO](https://marvelapp-prod-back.herokuapp.com/ "API - Back-end - PRODUÇÃO")
+#### [Repositório Git](https://github.com/thiagocristhianferreira/my-app-backend)
+
+### APLICAÇÃO DE DESENVOLVIMENTO (Front-end):
+#### [Marvel APP](https://marvelapp-development-thiagoc.herokuapp.com/ "Marvel APP")
+#### [Repositório Git](https://github.com/thiagocristhianferreira/my-app)
+### APLICAÇÃO DE DESENVOLVIMENTO (Back-end):
+#### [API - Back-end - DESENVOLVIMENTO](https://marvelapp-dev-back.herokuapp.com/ "API - Back-end - DESENVOLVIMENTO")
+#### [Repositório Git](https://github.com/thiagocristhianferreira/my-app-backend)
 
 Essa é uma aplicação onde é possível encontrar todas as informações sobre as comics e characters da marvel.
 
