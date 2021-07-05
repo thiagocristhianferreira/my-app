@@ -7,13 +7,23 @@
 <h2>Desafio Técnico realizado para a empresa : Stone</h2>
 
 ## Descrição:
-Link para a aplicação EM DESENVOLVIMENTO: [Marvel APP](https://marvelapp-development-thiagoc.herokuapp.com/ "Marvel APP")
+APLICAÇÃO DE PRODUÇÃO (Front-end):
+[Marvel APP](https://marvelapp-thiagocristhian.herokuapp.com/ "Marvel APP")
+[Repositório Git](https://github.com/thiagocristhianferreira/my-app)
+APLICAÇÃO DE PRODUÇÃO (Back-end):
+[API - Back-end - PRODUÇÃO](https://marvelapp-prod-back.herokuapp.com/ "API - Back-end - PRODUÇÃO")
+[Repositório Git](https://github.com/thiagocristhianferreira/my-app-backend)
 
-Link para a aplicação EM PRODUÇÃO: [Marvel APP](https://marvelapp-thiagocristhian.herokuapp.com/ "Marvel APP")
+APLICAÇÃO DE DESENVOLVIMENTO (Front-end):
+[Marvel APP](https://marvelapp-development-thiagoc.herokuapp.com/ "Marvel APP")
+[Repositório Git](https://github.com/thiagocristhianferreira/my-app)
+APLICAÇÃO DE DESENVOLVIMENTO (Back-end):
+[API - Back-end - DESENVOLVIMENTO](https://marvelapp-dev-back.herokuapp.com/ "API - Back-end - DESENVOLVIMENTO")
+[Repositório Git](https://github.com/thiagocristhianferreira/my-app-backend)
 
 Essa é uma aplicação onde é possível encontrar todas as informações sobre as comics e characters da marvel.
 
-É possível a criação de usuários (bug de cadastro corrigido), de Characters e de Comics Favoritos.
+É possível a criação de usuários e salvar Characters e Comics Favoritos.
 
 Possui uma barra de pesquisa onde é possível fazer a busca pelo Character ou Comic dentro da quantidade de cards definida. A pesquisa é realizada com base no nome do Character ou Comic.
 
@@ -39,7 +49,6 @@ Ainda há muito espaço para melhorias.
 - Context API
 - Node
 - Firebase:
-  * Authentication
   * Storage
 
 - Heroku:
@@ -54,20 +63,23 @@ Ainda há muito espaço para melhorias.
   src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-05-31%2000-54-35.png?alt=media&token=5f456a0a-d6ab-4038-9325-037df4d0a1e5"
 />
 
-<h2>Tela de Login</h2>
+<h2>TESTES - Tela de Login</h2>
 <img
   src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-05-31%2000-57-05.png?alt=media&token=a2d74d53-276e-4f32-b037-84345ade2366"
 />
 
-<h2>Tela NotFound</h2>
+<h2>TESTES - Tela NotFound</h2>
 <img
   src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-05-31%2000-57-34.png?alt=media&token=dc2ed268-75bd-4af0-9b86-8c3b48f981eb"
 />
 
 
-# Alguns usuários:
+# Criar Usuários:
+<img
+  src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-06-22%2000-34-36.png?alt=media&token=9f3d1d07-5eb2-41dc-a301-75dca6a7b05e"
+/>
 
-<h2>Tela para Criar Usuários</h2>
+# Login:
 <img
   src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-06-22%2000-34-36.png?alt=media&token=9f3d1d07-5eb2-41dc-a301-75dca6a7b05e"
 />
@@ -75,17 +87,8 @@ Ainda há muito espaço para melhorias.
 
 # Banco de Dados não-relacional:
 
-<h2>Favorites Characters</h2>
+<h2>Estrutura de dados</h2>
+<h2>As senhas são salvas no banco de dados de forma encriptada</h2>
 <img
-  src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-05-31%2001-00-23.png?alt=media&token=038d0629-af6a-4e99-82bb-b59ce7b78c70"
-/>
-
-<h2>Favorites Comics</h2>
-<img
-  src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-05-31%2001-00-40.png?alt=media&token=68257329-cd92-4a46-ae91-adc465e6bd2d"
-/>
-
-<h2>Users</h2>
-<img
-  src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-05-31%2001-01-04.png?alt=media&token=cc361a9a-a383-4bfa-b39b-1d4f6688f25e"
+  src="https://firebasestorage.googleapis.com/v0/b/my-app-98f0b.appspot.com/o/Captura%20de%20tela%20de%202021-07-04%2022-23-04.png?alt=media&token=f47846a3-fe41-4f3b-8192-9182294b18f8"
 />
